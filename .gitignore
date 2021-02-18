@@ -1,0 +1,6 @@
+.idea
+**/bin
+**/logs
+**/obj
+**/pacts
+*.user
