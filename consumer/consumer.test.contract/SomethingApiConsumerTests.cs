@@ -67,11 +67,11 @@ namespace consumer.test.contract
             var consumer = new SomethingApiClient(_mockProviderServiceBaseUri);
             
             // act
-            Something result = await consumer.GetSomething(expectedId);
+            Something actualSomething = await consumer.GetSomething(expectedId);
 
             // assert
             _mockProviderService.VerifyInteractions();
-            expectedSomething.Should().BeEquivalentTo(result);
+            actualSomething.Should().BeEquivalentTo(expectedSomething);
         }
     }
 }

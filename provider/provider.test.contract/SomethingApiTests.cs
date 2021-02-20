@@ -41,21 +41,31 @@ namespace provider.test.contract
                                           {
                                               new XUnitOutput(_outputHelper)
                                           },
+                             ProviderVersion = "0.1.0", // santi: git version?
+                             PublishVerificationResults = true,
                              Verbose = false
                          };
             
             // act
             // assert
-            var pactVerifier = new PactVerifier(config);
+            var pactVerifierConsumerXUnit = new PactVerifier(config);
+            var pactVerifierConsumerNUnit = new PactVerifier(config);
             
             // santi: use pact broker
             
-            pactVerifier
+            pactVerifierConsumerXUnit
                .ProviderState($"{TestServiceBaseUri}/provider-states")
-               .ServiceProvider("Provider", TestServiceBaseUri)
-               .HonoursPactWith("Consumer")
+               .ServiceProvider("Something API", TestServiceBaseUri)
+               .HonoursPactWith("My Consumer")
                .PactUri(@"../../../../../consumer/consumer.test.contract/pacts/my_consumer-something_api.json")
                .Verify();
+
+            pactVerifierConsumerNUnit
+                .ProviderState($"{TestServiceBaseUri}/provider-states")
+                .ServiceProvider("Something API", TestServiceBaseUri)
+                .HonoursPactWith("My Consumer NUnit")
+                .PactUri(@"../../../../../consumer/consumer.test.contract.nunit/pacts/my_consumer_nunit-something_api.json")
+                .Verify();
         }
 
         private readonly ITestOutputHelper _outputHelper;

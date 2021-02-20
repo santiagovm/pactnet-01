@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-
 namespace consumer
 {
+    // santi: make immutable
     public class Something
     {
         public string id { get; set; }
