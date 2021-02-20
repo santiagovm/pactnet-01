@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
-using Xunit;
-
-// santi: research multiple OS environments
-// https://github.com/pact-foundation/pact-workshop-dotnet-core-v1#nb---multiple-os-environments
+using Xunit; 
 
 namespace consumer.test.contract
 {
