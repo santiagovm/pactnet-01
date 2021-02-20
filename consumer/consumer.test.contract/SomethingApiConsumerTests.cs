@@ -43,6 +43,7 @@ namespace consumer.test.contract
                      {
                          Method = HttpVerb.Get,
                          Path = Match.Regex($"/somethings/{expectedId}", $"^\\/somethings\\/{guidRegex}$"),
+                         Query = "field1=value1&field2=value2",
                          Headers = new Dictionary<string, object>
                                    {
                                        { "Accept", "application/json" }
