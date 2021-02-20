@@ -4,3 +4,4 @@
 **/obj
 **/pacts
 *.user
+.vs
