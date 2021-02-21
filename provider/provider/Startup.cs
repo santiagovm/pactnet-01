@@ -13,10 +13,13 @@ namespace provider
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            DotNetEnv.Env.TraversePath().Load();
         }
         
         public virtual void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(provider => new FooApiClient(FooApiConfiguration.BaseUri));
+
             services.AddControllers();
         }
 

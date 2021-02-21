@@ -12,5 +12,5 @@ if ($LastExitCode -ne 0) { Exit $LastExitCode }
 
 # provider contract tests
 
-dotnet test .\provider\provider.test.contract\
+dotnet test .\provider\Provider.Test\
 if ($LastExitCode -ne 0) { Exit $LastExitCode }
