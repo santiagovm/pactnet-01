@@ -1,6 +1,6 @@
 using System;
 
-namespace provider
+namespace provider.FooIntegration
 {
     public static class FooApiConfiguration
     {

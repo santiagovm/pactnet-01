@@ -1,4 +1,4 @@
-﻿namespace provider
+﻿namespace provider.Controllers
 {
     public class Something
     {

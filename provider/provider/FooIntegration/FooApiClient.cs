@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using provider.Domain;
 
-namespace provider
+namespace provider.FooIntegration
 {
     public class FooApiClient
     {

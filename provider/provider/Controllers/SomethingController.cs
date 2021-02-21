@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using provider.Domain;
+using provider.FooIntegration;
 
 namespace provider.Controllers
 {

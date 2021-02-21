@@ -5,6 +5,8 @@ using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using provider;
+using provider.Domain;
+using provider.FooIntegration;
 using Provider.Test.Contract.Plumbing;
 using Xunit;
 

@@ -1,4 +1,4 @@
-﻿namespace provider
+﻿namespace provider.Domain
 {
     public class FooQuery
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace provider
+namespace provider.Domain
 {
     public class Foo
     {
