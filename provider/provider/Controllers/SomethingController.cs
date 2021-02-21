@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace provider.Controllers
@@ -12,7 +11,7 @@ namespace provider.Controllers
         {
             return new OkObjectResult(new
                                       {
-                                          id = "some-id",
+                                          id,
                                           firstName = "some-first-name",
                                           lastName = "some-last-name"
                                       });

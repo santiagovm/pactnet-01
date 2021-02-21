@@ -1,10 +1,25 @@
+using System;
+
 namespace consumer
 {
-    // santi: make immutable
     public class Something
     {
-        public string id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        // public setters required for serialization
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public Something(string id, string firstName, string lastName)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        [Obsolete("use constructor with parameters", error: true)]
+        public Something()
+        {
+            // parameter-less constructor required for serialization
+        }
     }
 }

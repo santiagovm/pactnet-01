@@ -13,7 +13,7 @@ namespace provider.test.contract.Middleware
         {
             _next = next;
 
-            _providerStates = new Dictionary<string, Action>()
+            _providerStates = new Dictionary<string, Action>
                               {
                                   { "There is no data", RemoveAllData },
                                   { "There is data", AddData }

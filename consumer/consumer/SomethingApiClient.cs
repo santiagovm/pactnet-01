@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -29,7 +30,7 @@ namespace consumer
 
             using var request = new HttpRequestMessage
             {
-                Method = HttpMethod.Get, 
+                Method = HttpMethod.Get,
                 RequestUri = uriBuilder.Uri
             };
 
@@ -37,8 +38,7 @@ namespace consumer
 
             using var httpClient = new HttpClient();
             using HttpResponseMessage response = await httpClient.SendAsync(request);
-            
-            string content = await response.Content.ReadAsStringAsync();
+
             HttpStatusCode status = response.StatusCode;
 
             if (status != HttpStatusCode.OK)
@@ -46,11 +46,16 @@ namespace consumer
                 throw new Exception(response.ReasonPhrase);
             }
 
-            return !string.IsNullOrEmpty(content) 
-                ? JsonSerializer.Deserialize<Something>(content) 
-                : null;
+            await using Stream stream = await response.Content.ReadAsStreamAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return await JsonSerializer.DeserializeAsync<Something>(stream, options);
         }
-        
+
         private readonly string _baseUri;
     }
 }

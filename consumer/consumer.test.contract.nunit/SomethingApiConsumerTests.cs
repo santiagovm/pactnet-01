@@ -34,13 +34,8 @@ namespace consumer.test.contract.nunit
             const string expectedId = "83F9262F-28F1-4703-AB1A-8CFD9E8249C9";
             const string expectedFirstName = "some-first-name";
             const string expectedLastName = "some-last-name";
-            
-            var expectedSomething = new Something
-            {
-                id = expectedId,
-                firstName = expectedFirstName,
-                lastName = expectedLastName
-            };
+
+            var expectedSomething = new Something(expectedId, expectedFirstName, expectedLastName);
             
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
