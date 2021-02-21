@@ -8,11 +8,11 @@ using Xunit.Abstractions;
 
 namespace provider.test.contract
 {
-    public class SomethingApiTests : IDisposable
+    public class SomethingApiProviderContractTests : IDisposable
     {
         private const string TestServiceBaseUri = "https://localhost:9001";
         
-        public SomethingApiTests(ITestOutputHelper outputHelper)
+        public SomethingApiProviderContractTests(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
             
@@ -32,7 +32,7 @@ namespace provider.test.contract
         }
         
         [Fact]
-        public void EnsureSomethingApiHonorsPactWithConsumer()
+        public void EnsureSomethingApiHonorsPactsWithConsumers()
         {
             // arrange
             var config = new PactVerifierConfig

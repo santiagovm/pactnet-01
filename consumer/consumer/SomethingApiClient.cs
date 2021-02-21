@@ -18,14 +18,14 @@ namespace consumer
 
         public async Task<Something> GetSomething(string id)
         {
-            NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
-            query["field1"] = "value1"; // santi: receive as parameters
-            query["field2"] = "value2";
+            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+            queryString["field1"] = "value1";
+            queryString["field2"] = "value2";
 
             var uriBuilder = new UriBuilder(_baseUri)
             {
                 Path = $"/somethings/{id}",
-                Query = query.ToString() ?? string.Empty
+                Query = queryString.ToString() ?? string.Empty
             };
 
             using var request = new HttpRequestMessage

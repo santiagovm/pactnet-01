@@ -9,9 +9,6 @@ namespace consumer.test.contract
 {
     public class SomethingApiConsumerTests : IClassFixture<ConsumerPactClassFixture>
     {
-        private readonly IMockProviderService _mockProviderService;
-        private readonly string _mockProviderServiceBaseUri;
-        
         public SomethingApiConsumerTests(ConsumerPactClassFixture fixture)
         {
             _mockProviderService = fixture.MockProviderService;
@@ -27,7 +24,11 @@ namespace consumer.test.contract
             const string expectedFirstName = "some-first-name";
             const string expectedLastName = "some-last-name";
 
-            var expectedSomething = new Something(expectedId, expectedFirstName, expectedLastName);
+            var expectedSomething = new Something(
+                expectedId,
+                expectedFirstName,
+                expectedLastName
+            );
             
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
@@ -59,14 +60,17 @@ namespace consumer.test.contract
                                            }
                                 });
             
-            var consumer = new SomethingApiClient(_mockProviderServiceBaseUri);
+            var somethingApiClient = new SomethingApiClient(_mockProviderServiceBaseUri);
             
             // act
-            Something actualSomething = await consumer.GetSomething(expectedId);
+            Something actualSomething = await somethingApiClient.GetSomething(expectedId);
 
             // assert
             _mockProviderService.VerifyInteractions();
             actualSomething.Should().BeEquivalentTo(expectedSomething);
         }
+
+        private readonly IMockProviderService _mockProviderService;
+        private readonly string _mockProviderServiceBaseUri;
     }
 }

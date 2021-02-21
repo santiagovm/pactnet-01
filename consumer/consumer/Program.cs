@@ -11,6 +11,5 @@ namespace consumer
     }
 }
 
-// santi: Vehicle consuming another service rds
 // santi: Dockerfile
 // santi: Docker compose
