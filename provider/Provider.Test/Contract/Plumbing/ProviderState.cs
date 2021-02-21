@@ -1,4 +1,4 @@
-namespace provider.test.contract.Middleware
+namespace Provider.Test.Contract.Plumbing
 {
     public class ProviderState
     {

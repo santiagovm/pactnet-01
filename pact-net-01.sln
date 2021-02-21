@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "consumer", "consumer", "{C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer", "consumer\consumer\consumer.csproj", "{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer", "consumer\consumer\consumer.csproj", "{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.test.contract", "consumer\consumer.test.contract\consumer.test.contract.csproj", "{F3E9577D-26E9-4383-9EF9-0E906E30C351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer.test.contract", "consumer\consumer.test.contract\consumer.test.contract.csproj", "{F3E9577D-26E9-4383-9EF9-0E906E30C351}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "provider", "provider", "{F92AD1A8-B7FE-4CCE-8350-282F569E23E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "provider", "provider\provider\provider.csproj", "{4103C32C-313E-4E11-87D2-C71E2D006FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "provider", "provider\provider\provider.csproj", "{4103C32C-313E-4E11-87D2-C71E2D006FB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "provider.test.contract", "provider\provider.test.contract\provider.test.contract.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Test", "provider\Provider.Test\Provider.Test.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer.test.contract.nunit", "consumer\consumer.test.contract.nunit\consumer.test.contract.nunit.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer.test.contract.nunit", "consumer\consumer.test.contract.nunit\consumer.test.contract.nunit.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -91,11 +88,17 @@ Global
 		{76CCEE9B-0AC8-4EDF-9634-28D54121865A}.Release|x86.ActiveCfg = Release|Any CPU
 		{76CCEE9B-0AC8-4EDF-9634-28D54121865A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}
 		{F3E9577D-26E9-4383-9EF9-0E906E30C351} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}
 		{4103C32C-313E-4E11-87D2-C71E2D006FB1} = {F92AD1A8-B7FE-4CCE-8350-282F569E23E0}
 		{6AC7462D-AA31-4D6F-8681-379D8CA2F500} = {F92AD1A8-B7FE-4CCE-8350-282F569E23E0}
 		{76CCEE9B-0AC8-4EDF-9634-28D54121865A} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90FE2346-F8B4-496C-A041-37472CDBA0D0}
 	EndGlobalSection
 EndGlobal

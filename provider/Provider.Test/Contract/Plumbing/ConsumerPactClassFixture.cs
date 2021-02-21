@@ -2,7 +2,7 @@
 using PactNet;
 using PactNet.Mocks.MockHttpService;
 
-namespace provider.test.contract
+namespace Provider.Test.Contract.Plumbing
 {
     public class ConsumerPactClassFixture : IDisposable
     {

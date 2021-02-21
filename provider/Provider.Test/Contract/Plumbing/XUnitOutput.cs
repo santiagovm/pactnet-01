@@ -1,7 +1,7 @@
 using PactNet.Infrastructure.Outputters;
 using Xunit.Abstractions;
 
-namespace provider.test.contract.XUnitHelpers
+namespace Provider.Test.Contract.Plumbing
 {
     public class XUnitOutput : IOutput
     {

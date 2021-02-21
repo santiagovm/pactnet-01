@@ -2,17 +2,17 @@ using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using PactNet;
-using provider.test.contract.XUnitHelpers;
+using Provider.Test.Contract.Plumbing;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace provider.test.contract
+namespace Provider.Test.Contract
 {
-    public class SomethingApiProviderContractTests : IDisposable
+    public class SomethingApiProviderTests : IDisposable
     {
         private const string TestServiceBaseUri = "https://localhost:9001";
         
-        public SomethingApiProviderContractTests(ITestOutputHelper outputHelper)
+        public SomethingApiProviderTests(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
             

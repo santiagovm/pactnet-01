@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using provider.test.contract.Middleware;
+using provider;
 
-namespace provider.test.contract
+namespace Provider.Test.Contract.Plumbing
 {
     public class TestStartup : Startup
     {

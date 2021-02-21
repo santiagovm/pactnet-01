@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
+using provider;
+using Provider.Test.Contract.Plumbing;
 using Xunit;
 
-namespace provider.test.contract
+namespace Provider.Test.Contract
 {
     public class FooApiConsumerTests : IClassFixture<ConsumerPactClassFixture>
     {
@@ -70,7 +73,7 @@ namespace provider.test.contract
 
             //assert
             _mockProviderService.VerifyInteractions();
-            actualFoos.Should().BeEquivalentTo(expectedFoos);
+            actualFoos.Should().BeEquivalentTo(expectedFoos.Cast<object>());
         }
 
         private readonly IMockProviderService _mockProviderService;
