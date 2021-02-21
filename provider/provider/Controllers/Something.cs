@@ -1,4 +1,4 @@
-﻿namespace provider.Controllers
+﻿namespace PactNet01.Provider.Controllers
 {
     public class Something
     {

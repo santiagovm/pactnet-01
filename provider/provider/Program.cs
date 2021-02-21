@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace provider
+namespace PactNet01.Provider
 {
     public static class Program
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace consumer
+namespace PactNet01.Consumer
 {
     internal static class Program
     {

@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
-using provider.Domain;
+using PactNet01.Provider.Domain;
 
-namespace provider.FooIntegration
+namespace PactNet01.Provider.FooIntegration
 {
     public class FooApiClient
     {

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using provider.FooIntegration;
+using PactNet01.Provider.FooIntegration;
 
-namespace provider
+namespace PactNet01.Provider
 {
     public class Startup
     {

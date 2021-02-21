@@ -2,7 +2,7 @@ using System;
 using PactNet;
 using PactNet.Mocks.MockHttpService;
 
-namespace consumer.test.contract
+namespace PactNet01.Consumer.Test.XUnit
 {
     public class ConsumerPactClassFixture : IDisposable
     {

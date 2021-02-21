@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
     <IsPackable>false</IsPackable>
+    <RootNamespace>PactNet01.Consumer.Test.XUnit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\consumer\consumer.csproj" />
+    <ProjectReference Include="..\Consumer\Consumer.csproj" />
   </ItemGroup>
 
 </Project>

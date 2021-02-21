@@ -1,6 +1,6 @@
 using System;
 
-namespace provider.FooIntegration
+namespace PactNet01.Provider.FooIntegration
 {
     public static class FooApiConfiguration
     {

@@ -4,13 +4,12 @@ using FluentAssertions;
 using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
-using provider;
-using provider.Domain;
-using provider.FooIntegration;
-using Provider.Test.Contract.Plumbing;
+using PactNet01.Provider.Domain;
+using PactNet01.Provider.FooIntegration;
+using PactNet01.Provider.Test.Contract.Plumbing;
 using Xunit;
 
-namespace Provider.Test.Contract
+namespace PactNet01.Provider.Test.Contract
 {
     public class FooApiConsumerTests : IClassFixture<ConsumerPactClassFixture>
     {

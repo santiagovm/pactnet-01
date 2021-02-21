@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace consumer
+namespace PactNet01.Consumer
 {
     public class SomethingApiClient
     {

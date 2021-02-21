@@ -1,4 +1,4 @@
-namespace Provider.Test.Contract.Plumbing
+namespace PactNet01.Provider.Test.Contract.Plumbing
 {
     public class ProviderState
     {

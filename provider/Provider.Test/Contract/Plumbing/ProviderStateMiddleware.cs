@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Provider.Test.Contract.Plumbing
+namespace PactNet01.Provider.Test.Contract.Plumbing
 {
     public class ProviderStateMiddleware
     {

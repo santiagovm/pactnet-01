@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
+    <RootNamespace>PactNet01.Provider.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\provider\provider.csproj" />
+    <ProjectReference Include="..\Provider\Provider.csproj" />
   </ItemGroup>
 
 </Project>

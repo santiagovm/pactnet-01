@@ -3,9 +3,9 @@ using FluentAssertions;
 using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
-using Xunit; 
+using Xunit;
 
-namespace consumer.test.contract
+namespace PactNet01.Consumer.Test.XUnit
 {
     public class SomethingApiConsumerTests : IClassFixture<ConsumerPactClassFixture>
     {

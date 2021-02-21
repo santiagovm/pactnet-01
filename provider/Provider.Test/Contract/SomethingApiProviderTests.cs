@@ -7,11 +7,11 @@ using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.Models;
-using Provider.Test.Contract.Plumbing;
+using PactNet01.Provider.Test.Contract.Plumbing;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Provider.Test.Contract
+namespace PactNet01.Provider.Test.Contract
 {
     public class SomethingApiProviderTests : IDisposable
     {
@@ -106,14 +106,14 @@ namespace Provider.Test.Contract
                .ProviderState($"{TestServiceBaseUri}/provider-states")
                .ServiceProvider("Something API", TestServiceBaseUri)
                .HonoursPactWith("My Consumer")
-               .PactUri(@"../../../../../consumer/consumer.test.contract/pacts/my_consumer-something_api.json")
+               .PactUri(@"../../../../../Consumer/Consumer.Test.XUnit/pacts/my_consumer-something_api.json")
                .Verify();
 
             pactVerifierConsumerNUnit
                 .ProviderState($"{TestServiceBaseUri}/provider-states")
                 .ServiceProvider("Something API", TestServiceBaseUri)
                 .HonoursPactWith("My Consumer NUnit")
-                .PactUri(@"../../../../../consumer/consumer.test.contract.nunit/pacts/my_consumer_nunit-something_api.json")
+                .PactUri(@"../../../../../Consumer/Consumer.Test.NUnit/pacts/my_consumer_nunit-something_api.json")
                 .Verify();
         }
 

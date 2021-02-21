@@ -1,4 +1,4 @@
-﻿namespace provider.Domain
+﻿namespace PactNet01.Provider.Domain
 {
     public class FooQuery
     {
