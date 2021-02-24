@@ -18,9 +18,13 @@ based on:
 ### Pact Broker
 
 - docs ([link](https://docs.pact.io/pact_broker))
+  - webhooks ([link](https://docs.pact.io/pact_broker/webhooks))
+  - setup checklist ([link](https://docs.pact.io/pact_broker/set_up_checklist/))
 - dockerised pact broker ([link](https://hub.docker.com/r/pactfoundation/pact-broker))
+- docker compose sample ([link](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml))
 - pact publish script (powershell) ([link](https://gist.github.com/neilcampbell/bc1fb7d409425894ece0))
 - pact cli ([link](https://hub.docker.com/r/pactfoundation/pact-cli))
+- can-i-deploy docs ([link](https://github.com/pact-foundation/pact_broker-client#can-i-deploy))
 
 ### Pact Wiki
 
