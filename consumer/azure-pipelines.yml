@@ -4,7 +4,7 @@ trigger:
     - main
   paths:
     include:
-    - Consumer
+    - consumer
 
 pool:
     vmImage: ubuntu-latest
