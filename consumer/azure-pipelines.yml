@@ -19,9 +19,9 @@ stages:
         displayName: build
         inputs:
           command: build
-          arguments: '--configuration Release'
+          arguments: 'consumer/consumer/consumer.csproj --configuration Release'
       - task: DotNetCoreCLI@2
         displayName: test
         inputs:
           command: test
-          arguments: '--configuration Release'
+          arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
