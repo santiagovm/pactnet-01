@@ -29,4 +29,4 @@ stages:
         displayName: publish
         inputs:
           command: publish
-          projects: consumer/consumer/consumer.csproj
+          projects: '**/*.csproj'
