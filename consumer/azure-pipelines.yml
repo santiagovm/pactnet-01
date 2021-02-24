@@ -29,4 +29,5 @@ stages:
         displayName: publish
         inputs:
           command: publish
-          projects: '**/*.csproj'
+          projects: consumer/consumer/consumer.csproj
+          arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'

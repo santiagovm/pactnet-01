@@ -1,0 +1,60 @@
+backup
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - Consumer
+
+pool:
+    vmImage: ubuntu-latest
+
+stages:
+- stage: build
+  jobs:
+  - job: build
+    continueOnError: 'false'
+    steps:
+      - task: DotNetCoreCLI@2
+        displayName: build
+        inputs:
+          command: build
+          arguments: '--configuration Release'
+
+      - task: DotNetCoreCLI@2
+        displayName: test
+        inputs:
+          command: test
+          arguments: '--configuration Release'
+
+      - task: DotNetCoreCLI@2
+        displayName: publish
+        inputs:
+          command: publish
+          arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+
+- stage: deploy_dev
+  jobs:
+  - template: deploy-app-service-template.yml
+    parameters:
+      environment: dev
+      webAppName: consumer-app-service-dev
+      subscription: $(subscription)
+  
+- stage: deploy_ua
+  jobs:
+  - template: deploy-app-service-template.yml
+    parameters:
+      environment: ua
+      webAppName: consumer-app-service-ua
+      subscription: $(subscription)
+
+- stage: deploy_prod
+  jobs:
+  - template: deploy-app-service-template.yml
+    parameters:
+      environment: prod
+      webAppName: consumer-app-service-prod
+      subscription: $(subscription)
