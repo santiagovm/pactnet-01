@@ -15,9 +15,13 @@ stages:
   - job: build
     continueOnError: 'false'
     steps:
-      - script: tree -L 3
       - task: DotNetCoreCLI@2
         displayName: build
         inputs:
           command: build
+          arguments: '--configuration Release'
+      - task: DotNetCoreCLI@2
+        displayName: test
+        inputs:
+          command: test
           arguments: '--configuration Release'
