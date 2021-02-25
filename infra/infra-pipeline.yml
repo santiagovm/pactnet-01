@@ -1,3 +1,11 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - infra
+
 stages :
   - stage: validate
     jobs:
