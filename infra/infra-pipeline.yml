@@ -63,3 +63,4 @@ stages :
                     provider: 'azurerm'
                     command: 'plan'
                     environmentServiceNameAzureRM: 'azure-tf-rg'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
