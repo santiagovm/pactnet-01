@@ -32,18 +32,3 @@ stages :
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              
-  - stage: deploy
-      jobs:
-          - deployment: deploy_terraform
-            continueOnError: false
-            environment: 'tooling'
-            strategy:
-              runOnce:
-                deploy:
-                  steps:
-                    - checkout: self
-                    - task: TerraformInstaller@0
-                      displayName: 'install'
-                      inputs:
-                        terraformVersion: '0.14.7'
