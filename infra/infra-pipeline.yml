@@ -64,3 +64,10 @@ stages :
                     command: 'plan'
                     environmentServiceNameAzureRM: 'azure-tf-rg'
                     workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
+                - task: TerraformTaskV1@0
+                  displayName: 'apply'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'apply'
+                    environmentServiceNameAzureRM: 'azure-tf-rg'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
