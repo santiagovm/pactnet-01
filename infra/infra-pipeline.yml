@@ -62,4 +62,4 @@ stages :
                   inputs:
                     provider: 'azurerm'
                     command: 'plan'
-                    environmentServiceNameAzureRM: 'azure-devops-01-pact-net-01-spn'
+                    environmentServiceNameAzureRM: 'azure-tf-rg'
