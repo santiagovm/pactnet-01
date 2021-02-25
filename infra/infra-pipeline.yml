@@ -26,3 +26,4 @@ stages :
               backendAzureRmStorageAccountName: 'svasqueztfsa01'
               backendAzureRmContainerName: 'tf-state-devops'
               backendAzureRmKey: 'terraform.tfstate'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
