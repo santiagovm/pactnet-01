@@ -46,3 +46,14 @@ stages :
                   displayName: 'install'
                   inputs:
                     terraformVersion: '0.14.7'
+                - task: TerraformTaskV1@0
+                  displayName: 'init'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'init'
+                    backendServiceArm: 'azure-tf-rg'
+                    backendAzureRmResourceGroupName: 'tf-rg'
+                    backendAzureRmStorageAccountName: 'svasqueztfsa01'
+                    backendAzureRmContainerName: 'tf-state-devops'
+                    backendAzureRmKey: 'terraform.tfstate'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
