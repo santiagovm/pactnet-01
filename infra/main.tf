@@ -18,3 +18,12 @@ resource "azurerm_virtual_network" "pact-broker-vn" {
   location            = "eastus2"
   resource_group_name = azurerm_resource_group.pact-broker-rg.name
 }
+
+resource "azurerm_subnet" "postgres-sn" {
+  name                 = "postgres-sn"
+  resource_group_name  = azurerm_resource_group.pact-broker-rg.name
+  virtual_network_name = azurerm_virtual_network.pact-broker-vn.name
+  address_prefix       = "10.0.1.0/24"
+
+  enforce_private_link_endpoint_network_policies = true
+}
