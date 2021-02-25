@@ -57,3 +57,9 @@ stages :
                     backendAzureRmContainerName: 'tf-state-devops'
                     backendAzureRmKey: 'terraform.tfstate'
                     workingDirectory: '$(System.DefaultWorkingDirectory)/infra/'
+                - task: TerraformTaskV1@0
+                  displayName: 'plan'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'plan'
+                    environmentServiceNameAzureRM: 'azure-devops-01-pact-net-01-spn'
