@@ -71,8 +71,8 @@ resource "azurerm_key_vault_secret" "postgres-password-secret" {
 }
 
 resource "azurerm_postgresql_server" "postgres" {
-  name = "svasquez-postgres-server-01"
-  location = "eastus2"
+  name                 = "svasquez-postgres-server-01"
+  location             = azurerm_resource_group.pact-broker-rg.location
   resource_group_name  = azurerm_resource_group.pact-broker-rg.name
   
   sku_name = "B_Gen5_1"
@@ -84,8 +84,22 @@ resource "azurerm_postgresql_server" "postgres" {
     auto_grow             = "Enabled"
   }
 
-  administrator_login = "sa"
+  administrator_login          = "sa"
   administrator_login_password = azurerm_key_vault_secret.postgres-password-secret.value
-  version = "11"
-  ssl_enforcement_enabled = true
+  version                      = "11"
+  ssl_enforcement_enabled      = true
+}
+
+resource "azurerm_private_endpoint" "postgres-pe" {
+  name                 = "postgres-private-endpoint"
+  location             = azurerm_resource_group.pact-broker-rg.location
+  resource_group_name  = azurerm_resource_group.pact-broker-rg.name
+  subnet_id            = azurerm_subnet.postgres-sn.id
+
+  private_service_connection {
+    name = "postgres-private-service-connection"
+    private_connection_resource_id = azurerm_postgresql_server.postgres.id
+    subresource_names              = [ "postgres" ]
+    is_manual_connection           = false
+  }
 }
