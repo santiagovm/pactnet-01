@@ -71,7 +71,7 @@ resource "azurerm_key_vault_secret" "postgres-password-secret" {
 }
 
 resource "azurerm_postgresql_server" "postgres" {
-  name = "postgres_server"
+  name = "postgres-server"
   location = "eastus2"
   resource_group_name  = azurerm_resource_group.pact-broker-rg.name
   

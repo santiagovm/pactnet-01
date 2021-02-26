@@ -44,3 +44,4 @@ Based on dotnet-env ([link 1](https://github.com/tonerdo/dotnet-env) | [link 2](
 - azure, terraform, postgres ([link](https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/using-terraform-to-create-private-endpoint-for-azure-database/ba-p/1276608))
 - azure devops + terraform ([link 1](https://thomasthornton.cloud/2020/07/08/deploy-terraform-using-azure-devops/) | [link 2](https://thomasthornton.cloud/2020/09/22/deploying-terraform-from-develop-to-production-consecutively-using-azure-devops/) | [link 3](https://thomasthornton.cloud/2020/11/28/terraforming-from-zero-to-pipelines-as-code-with-azure-devops/))
 - key vault ([link](https://jakewalsh.co.uk/automating-azure-key-vault-and-secrets-using-terraform/))
+- nice sample ([link](https://medium.com/faun/terraform-series-01-scalable-app-service-using-azure-postgresql-db-part-1-9eb853bdad5c))
