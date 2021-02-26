@@ -58,3 +58,14 @@ resource "azurerm_key_vault" "key-vault" {
     ]
   } 
 }
+
+resource "random_password" "postgres-password" {
+  length  = 21
+  special = true
+}
+
+resource "azurerm_key_vault_secret" "postgres-password-secret" {
+  name = "postgres-password-secret"
+  value = random_password.postgres-password.result
+  key_vault_id = azurerm_key_vault.key-vault.id
+}
