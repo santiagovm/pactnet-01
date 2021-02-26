@@ -30,8 +30,8 @@ resource "azurerm_subnet" "postgres-sn" {
 
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_key_vault" "the-key-vault" {
-  name                        = "the-key-vault"
+resource "azurerm_key_vault" "key-vault" {
+  name                        = "svasquez-key-vault-01"
   location                    = azurerm_resource_group.pact-broker-rg.location
   resource_group_name         = azurerm_resource_group.pact-broker-rg.name
   enabled_for_disk_encryption = true
