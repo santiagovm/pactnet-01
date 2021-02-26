@@ -97,9 +97,9 @@ resource "azurerm_private_endpoint" "postgres-pe" {
   subnet_id            = azurerm_subnet.postgres-sn.id
 
   private_service_connection {
-    name = "postgres-private-service-connection"
+    name                           = "postgres-private-service-connection"
     private_connection_resource_id = azurerm_postgresql_server.postgres.id
-    subresource_names              = [ "postgres" ]
+    subresource_names              = [ "postgresqlServer" ]
     is_manual_connection           = false
   }
 }
