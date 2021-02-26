@@ -69,3 +69,23 @@ resource "azurerm_key_vault_secret" "postgres-password-secret" {
   value = random_password.postgres-password.result
   key_vault_id = azurerm_key_vault.key-vault.id
 }
+
+resource "azurerm_postgresql_server" "postgres" {
+  name = "postgres_server"
+  location = "eastus2"
+  resource_group_name  = azurerm_resource_group.pact-broker-rg.name
+  
+  sku_name = "B_Gen5_1"
+
+  storage_profile {
+    storage_mb            = 5120
+    backup_retention_days = 7
+    geo_redundant_backup  = "Disabled"
+    auto_grow             = "Enabled"
+  }
+
+  administrator_login = "sa"
+  administrator_login_password = azurerm_key_vault_secret.postgres-password-secret.value
+  version = "11"
+  ssl_enforcement_enabled = true
+}
