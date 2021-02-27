@@ -26,21 +26,21 @@ stages:
   # - name: pact.broker.api.token
 
   jobs:
-  # - job: test
-  #   steps:
-  #     - task: DotNetCoreCLI@2
-  #       displayName: dotnet build
-  #       inputs:
-  #         command: build
-  #         arguments: 'consumer/consumer/consumer.csproj --configuration Release'
-  #     - task: DotNetCoreCLI@2
-  #       displayName: dotnet test
-  #       inputs:
-  #         command: test
-  #         arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
-  #     - publish: 'consumer/Consumer.Test.NUnit/pacts'
-  #       artifact: pacts
-  #       displayName: create pacts artifact
+  - job: test
+    steps:
+      # - task: DotNetCoreCLI@2
+      #   displayName: dotnet build
+      #   inputs:
+      #     command: build
+      #     arguments: 'consumer/consumer/consumer.csproj --configuration Release'
+      - task: DotNetCoreCLI@2
+        displayName: dotnet test
+        inputs:
+          command: test
+          arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
+      - publish: 'consumer/Consumer.Test.NUnit/pacts'
+        artifact: pacts
+        displayName: create pacts artifact
 
       # - task: DotNetCoreCLI@2
       #   displayName: publish
