@@ -18,13 +18,6 @@ pool:
 stages:
 - stage: build
 
-  variables:
-    GIT_COMMIT_SHORT_SHA: value-set-later
-    PACT_BROKER_BASE_URL: $(pact.broker.base.url)
-  # - name: git.commit.short.sha
-  # - name: pact.broker.base.url
-  # - name: pact.broker.api.token
-
   jobs:
   - job: test
     steps:
@@ -53,6 +46,8 @@ stages:
     displayName: publish pacts
     services:
       pact_cli: pact_cli
+    variables:
+        GIT_COMMIT_SHORT_SHA: value-set-below
     steps:
       - download: current
         artifact: pacts
@@ -70,10 +65,6 @@ stages:
           echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
         displayName: set publish variables
       - script: |
-          echo GIT_COMMIT_SHORT_SHA: $GIT_COMMIT_SHORT_SHA
-          echo PACT_BROKER_BASE_URL: $PACT_BROKER_BASE_URL
-        displayName: show variables
-      - script: |
           docker run --rm \
             --volume $(Pipeline.Workspace)/pacts:/pacts \
             pactfoundation/pact-cli:latest \
@@ -85,15 +76,5 @@ stages:
             --verbose
         displayName: docker run pact-cli
         env:
+          PACT_BROKER_BASE_URL: $(pact.broker.base.url)
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
-
-        # docker run --rm \
-        # --workdir ${pwd} \
-        # --volume ${pwd}:${pwd} \
-        # pactfoundation/pact-cli:latest \
-        # broker publish ${pwd/pacts} \
-        # --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
-        # --tag=$(Build.SourceBranch) \
-        # --broker-base-url=$PACT_BROKER_BASE_URL \
-        # --broker-token=$PACT_BROKER_API_TOKEN \
-        # --verbose
