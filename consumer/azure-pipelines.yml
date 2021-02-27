@@ -93,7 +93,7 @@ stages:
       #     --broker-token=$PACT_BROKER_API_TOKEN
       #   displayName: docker run
       - script: |
-          docker run --rm pactfoundation/pact-cli:latest echo "hi from pact-cli container"
+          docker run --rm pactfoundation/pact-cli:latest help
         displayName: docker run
       # - script: |
       #     pact-broker publish pacts \
