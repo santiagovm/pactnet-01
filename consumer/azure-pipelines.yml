@@ -75,12 +75,15 @@ stages:
           echo GIT_COMMIT_SHORT_SHA: $GIT_COMMIT_SHORT_SHA
           echo Build.SourceBranch: $(Build.SourceBranch)
           echo PACT_BROKER_BASE_URL: $PACT_BROKER_BASE_URL
+
+          echo GIT_COMMIT_SHORT_SHA: $(git.commit.short.sha)
+          echo PACT_BROKER_BASE_URL: $(pact.broker.base.url)
         displayName: show variables
       - script: |
-          pact-broker publish pacts 
-            --consumer-app-version=$GIT_COMMIT_SHORT_SHA
-            --tag=$(Build.SourceBranch)
-            --broker-base-url=$PACT_BROKER_BASE_URL
+          pact-broker publish pacts \
+            --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
+            --tag=$(Build.SourceBranch) \
+            --broker-base-url=$PACT_BROKER_BASE_URL \
             --broker-token=$PACT_BROKER_API_TOKEN
         displayName: pact-broker publish
         # target:
