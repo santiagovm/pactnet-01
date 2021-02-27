@@ -20,8 +20,8 @@ stages:
 
   variables:
   - name: git.commit.short.sha
-  - name: pact.broker.base.url
-  - name: pact.broker.api.token
+  # - name: pact.broker.base.url
+  # - name: pact.broker.api.token
 
   jobs:
   # - job: test
