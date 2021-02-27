@@ -82,6 +82,6 @@ stages:
             --tag=$(Build.SourceBranch)
             --broker-base-url=$(PACT_BROKER_BASE_URL)
             --broker-token=$(PACT_BROKER_API_TOKEN)
-        displayName: pact-broker publish
-        target:
-          container: pact_cli
+        # displayName: pact-broker publish
+        # target:
+        #   container: pact_cli
