@@ -41,8 +41,9 @@ stages:
       #   inputs:
       #     pathToPublish: 'consumer/Consumer.Test.NUnit/pacts'
       #     artifactName: pacts
-      - publish: '$(Build.ArtifactStagingDirectory)'
-        artifact: drop
+      - publish: 'consumer/Consumer.Test.NUnit/pacts'
+        artifact: pacts
+        displayName: create pacts artifact
       # - task: DotNetCoreCLI@2
       #   displayName: publish
       #   inputs:
@@ -66,6 +67,7 @@ stages:
     steps:
       - download: current
         artifact: pacts
+        displayName: get pacts artifact
       - script: |
           ls $(Pipeline.Workspace)/pacts
         displayName: list pacts
