@@ -7,6 +7,11 @@ trigger:
     include:
     - consumer
 
+resources:
+  containers:
+    - container: pact_cli
+      image: pactfoundation/pact-cli:latest
+
 pool:
     vmImage: ubuntu-latest
 
@@ -56,7 +61,7 @@ stages:
   jobs:
   - job: pact_publish
     displayName: pact publish
-    container: pactfoundation/pact-cli:latest
+    container: pact_cli
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
