@@ -31,6 +31,7 @@ stages:
           dotnet test provider/Provider.Test/Provider.Test.csproj --configuration Release
         displayName: dotnet test
         env:
+          PROVIDER_FOO_API_BASE_URI: http://localhost:9333
           CONSUMER_PACT_URI: https://vasquezhouse.pactflow.io/pacts/provider/Something%20API/consumer/My%20Consumer%20NUnit/latest/refs%2Fheads%2Fmain
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
           GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
