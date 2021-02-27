@@ -43,6 +43,9 @@ stages:
       #     arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
 
 - stage: publish
+  variables:
+  - name: gitCommitShortSha
+    value: not-set
   jobs:
   - job: set_publish_variables
     displayName: set publish variables
@@ -54,17 +57,20 @@ stages:
           shortSha=${sourceVersion:0:7}
           echo shortSha: $shortSha
 
-          echo '##vso[task.setvariable variable=CI_COMMIT_SHORT_SHA]$shortSha'  ## set variable for using in next steps
+          echo '##vso[task.setvariable variable=gitCommitShortSha]$shortSha'
         displayName: set publish variables
         name: foo
-      - script: echo $(foo.CI_COMMIT_SHORT_SHA)
+      - script: echo $(gitCommitShortSha)
 
   - job: check_vars
     dependsOn: set_publish_variables
     variables:
       bar: $[ dependencies.set_publish_variables.outputs['foo.CI_COMMIT_SHORT_SHA'] ]
     steps:
-      - script: echo $(bar)
+      - script: |
+          echo bar: $(bar)
+      - script: |
+          echo gitCommitShortSha: $(gitCommitShortSha)
 
   # - job: pact_publish
   #   displayName: pact publish
