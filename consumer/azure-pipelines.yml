@@ -56,6 +56,7 @@ stages:
 
           echo '##vso[task.setvariable variable=CI_COMMIT_SHORT_SHA]$shortSha'  ## set variable for using in next steps
         displayName: set publish variables
+      - script: echo $CI_COMMIT_SHORT_SHA
 
   - job: check_vars
     steps:
