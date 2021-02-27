@@ -19,7 +19,9 @@ stages:
 - stage: build
 
   variables:
-  - name: git.commit.short.sha
+    GIT_COMMIT_SHORT_SHA: value-set-later
+    PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+  # - name: git.commit.short.sha
   # - name: pact.broker.base.url
   # - name: pact.broker.api.token
 
@@ -52,11 +54,6 @@ stages:
     services:
       pact_cli: pact_cli
     steps:
-      - script: |
-          curl -i https://vasquezhouse.pactflow.io
-          curl -i $(pact.broker.base.url)
-        displayName: debug pactflow acccess
-
       - download: current
         artifact: pacts
         displayName: get pacts artifact
@@ -70,8 +67,12 @@ stages:
           shortSha=${sourceVersion:0:7}
           echo shortSha: $shortSha
 
-          echo "##vso[task.setvariable variable=gitCommitShortSha]$shortSha"
+          echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
         displayName: set publish variables
+      - script: |
+          echo GIT_COMMIT_SHORT_SHA: $GIT_COMMIT_SHORT_SHA
+          echo PACT_BROKER_BASE_URL: $PACT_BROKER_BASE_URL
+        displayName: show variables
       - script: |
           docker run --rm \
             --volume $(Pipeline.Workspace)/pacts:/pacts \
@@ -82,7 +83,9 @@ stages:
             --broker-base-url=$PACT_BROKER_BASE_URL \
             --broker-token=$PACT_BROKER_API_TOKEN \
             --verbose
-        displayName: docker run pact-cli 
+        displayName: docker run pact-cli
+        env:
+          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
 
         # docker run --rm \
         # --workdir ${pwd} \
