@@ -85,12 +85,15 @@ stages:
       #   displayName: will see
       #   inputs:
       #     command: login
+      # - script: |
+      #     docker run --rm pactfoundation/pact-cli:latest pact-broker publish pacts \
+      #     --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
+      #     --tag=$(Build.SourceBranch) \
+      #     --broker-base-url=$PACT_BROKER_BASE_URL \
+      #     --broker-token=$PACT_BROKER_API_TOKEN
+      #   displayName: docker run
       - script: |
-          docker run --rm pactfoundation/pact-cli:latest pact-broker publish pacts \
-          --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
-          --tag=$(Build.SourceBranch) \
-          --broker-base-url=$PACT_BROKER_BASE_URL \
-          --broker-token=$PACT_BROKER_API_TOKEN
+          docker run --rm pactfoundation/pact-cli:latest echo "hi from pact-cli container"
         displayName: docker run
       # - script: |
       #     pact-broker publish pacts \
