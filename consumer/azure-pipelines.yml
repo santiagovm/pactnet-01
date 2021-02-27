@@ -10,31 +10,31 @@ pool:
     vmImage: ubuntu-latest
 
 stages:
-- stage: build
-  jobs:
-  - job: build
-    steps:
-      - task: DotNetCoreCLI@2
-        displayName: build
-        inputs:
-          command: build
-          arguments: 'consumer/consumer/consumer.csproj --configuration Release'
-      - task: DotNetCoreCLI@2
-        displayName: test
-        inputs:
-          command: test
-          arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
-      - task: CopyFiles@2
-        displayName: stage pacts
-        inputs:
-          sourceFolder: 'consumer/Consumer.Test.NUnit'
-          contents: 'pacts/*.json'
-          targetFolder: '$(Build.ArtifactStagingDirectory)'
-      - task: PublishBuildArtifacts@1
-        displayName: publish artifacts
-        inputs:
-          pathToPublish: '$(Build.ArtifactStagingDirectory)'
-          artifactName: drop
+# - stage: build
+#   jobs:
+#   - job: build
+#     steps:
+#       - task: DotNetCoreCLI@2
+#         displayName: build
+#         inputs:
+#           command: build
+#           arguments: 'consumer/consumer/consumer.csproj --configuration Release'
+#       - task: DotNetCoreCLI@2
+#         displayName: test
+#         inputs:
+#           command: test
+#           arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
+#       - task: CopyFiles@2
+#         displayName: stage pacts
+#         inputs:
+#           sourceFolder: 'consumer/Consumer.Test.NUnit'
+#           contents: 'pacts/*.json'
+#           targetFolder: '$(Build.ArtifactStagingDirectory)'
+#       - task: PublishBuildArtifacts@1
+#         displayName: publish artifacts
+#         inputs:
+#           pathToPublish: '$(Build.ArtifactStagingDirectory)'
+#           artifactName: drop
       # - task: DotNetCoreCLI@2
       #   displayName: publish
       #   inputs:
@@ -60,12 +60,16 @@ stages:
           echo '##vso[task.setvariable variable=gitCommitShortSha]$shortSha'
         displayName: set publish variables
         name: foo
-      - script: echo $(gitCommitShortSha)
+      - script: |
+          echo gitCommitShortSha1: $(gitCommitShortSha)
+          echo gitCommitShortSha2: $gitCommitShortSha
+          echo gitCommitShortSha3: $GITCOMMITSHORTSHA
+        displayName: check in same job
 
   - job: check_vars
     dependsOn: set_publish_variables
     variables:
-      bar: $[ dependencies.set_publish_variables.outputs['foo.CI_COMMIT_SHORT_SHA'] ]
+      bar: $[ dependencies.set_publish_variables.outputs['foo.gitCommitShortSha'] ]
     steps:
       - script: |
           echo bar: $(bar)
