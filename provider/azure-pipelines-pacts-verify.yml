@@ -6,6 +6,7 @@ resources:
     connection: vasquez-house-pactflow
     filters:
     - path: consumerPactUri
+      value: not-set
 
 pool:
     vmImage: ubuntu-latest
