@@ -55,3 +55,4 @@ Based on dotnet-env ([link 1](https://github.com/tonerdo/dotnet-env) | [link 2](
 
 - Predefined variables ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml))
 - Set variables in the pipeline ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#setvariable-initialize-or-modify-the-value-of-a-variable))
+- Service Containers ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml))

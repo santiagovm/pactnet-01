@@ -72,9 +72,30 @@ stages:
             --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
             --tag=$(Build.SourceBranch) \
             --broker-base-url=$PACT_BROKER_BASE_URL \
+            --broker-token=$PACT_BROKER_API_TOKEN
+        displayName: pact-broker publish
+        env:
+          PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
+
+  - job: check_pacts
+    displayName: check pacts
+    services:
+      pact_cli: pact_cli
+    steps:
+      - script: |
+          docker run --rm \
+            pactfoundation/pact-cli:latest \
+            broker can-i-deploy \
+            --participant "My Consumer NUnit" \
+            --version $GIT_COMMIT_SHORT_SHA \
+            --to dev \
+            --broker-base-url=$PACT_BROKER_BASE_URL \
             --broker-token=$PACT_BROKER_API_TOKEN \
+            --retry-while-unknown 2 \
+            --retry-interval 30 \
             --verbose
-        displayName: docker run pact-cli
+        displayName: pact-broker can-i-deploy
         env:
           PACT_BROKER_BASE_URL: $(pact.broker.base.url)
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
