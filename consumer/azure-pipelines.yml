@@ -56,11 +56,15 @@ stages:
 
           echo '##vso[task.setvariable variable=CI_COMMIT_SHORT_SHA]$shortSha'  ## set variable for using in next steps
         displayName: set publish variables
-      - script: echo $CI_COMMIT_SHORT_SHA
+        name: foo
+      - script: echo $(foo.CI_COMMIT_SHORT_SHA)
 
   - job: check_vars
+    dependsOn: set_publish_variables
+    variables:
+      bar: $[ dependencies.set_publish_variables.outputs['foo.CI_COMMIT_SHORT_SHA'] ]
     steps:
-      - script: echo $CI_COMMIT_SHORT_SHA
+      - script: echo $(bar)
 
   # - job: pact_publish
   #   displayName: pact publish
