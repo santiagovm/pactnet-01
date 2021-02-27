@@ -61,6 +61,7 @@ stages:
   jobs:
   - job: pact_publish
     displayName: pact publish
+    container: pact_cli
     services:
       pact_cli: pact_cli
     steps:
@@ -88,5 +89,5 @@ stages:
             --broker-base-url=$PACT_BROKER_BASE_URL \
             --broker-token=$PACT_BROKER_API_TOKEN
         displayName: pact-broker publish
-        target:
-          container: pact_cli
+        # target:
+        #   container: pact_cli
