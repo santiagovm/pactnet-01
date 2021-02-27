@@ -81,10 +81,10 @@ stages:
           echo GIT_COMMIT_SHORT_SHA: $(git.commit.short.sha)
           echo PACT_BROKER_BASE_URL: $(pact.broker.base.url)
         displayName: show variables
-      - task: Docker@2
-        displayName: will see
-        inputs:
-          command: login
+      # - task: Docker@2
+      #   displayName: will see
+      #   inputs:
+      #     command: login
       - script: |
           docker run --rm pactfoundation/pact-cli:latest pact-broker publish pacts \
           --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
