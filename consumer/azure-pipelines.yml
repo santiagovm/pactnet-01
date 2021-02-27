@@ -30,17 +30,6 @@ stages:
         inputs:
           command: test
           arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
-      # - task: CopyFiles@2
-      #   displayName: stage pacts
-      #   inputs:
-      #     sourceFolder: 'consumer/Consumer.Test.NUnit'
-      #     contents: 'pacts/*.json'
-      #     targetFolder: '$(Build.ArtifactStagingDirectory)'
-      # - task: PublishBuildArtifacts@1
-      #   displayName: publish artifacts
-      #   inputs:
-      #     pathToPublish: 'consumer/Consumer.Test.NUnit/pacts'
-      #     artifactName: pacts
       - publish: 'consumer/Consumer.Test.NUnit/pacts'
         artifact: pacts
         displayName: create pacts artifact
@@ -82,8 +71,9 @@ stages:
         displayName: set publish variables
       - script: |
           docker run --rm \
+            --volume $(Pipeline.Workspace)/pacts:/pacts \
             pactfoundation/pact-cli:latest \
-            broker publish $(Pipeline.Workspace)/pacts \
+            broker publish /pacts \
             --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
             --tag=$(Build.SourceBranch) \
             --broker-base-url=$PACT_BROKER_BASE_URL \
