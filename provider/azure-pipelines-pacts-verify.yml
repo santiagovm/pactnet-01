@@ -1,0 +1,24 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - provider
+
+pool:
+    vmImage: ubuntu-latest
+
+stages:
+- stage: dev
+  displayName: dev environment
+
+  jobs:
+  - job: test
+    steps:
+      - task: DotNetCoreCLI@2
+        displayName: dotnet test
+        inputs:
+          command: test
+          arguments: 'provider/Provider.Test/Provider.Test.csproj --configuration Release'

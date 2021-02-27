@@ -22,11 +22,6 @@ stages:
   jobs:
   - job: test
     steps:
-      # - task: DotNetCoreCLI@2
-      #   displayName: dotnet build
-      #   inputs:
-      #     command: build
-      #     arguments: 'consumer/consumer/consumer.csproj --configuration Release'
       - task: DotNetCoreCLI@2
         displayName: dotnet test
         inputs:
@@ -35,14 +30,7 @@ stages:
       - publish: 'consumer/Consumer.Test.NUnit/pacts'
         artifact: pacts
         displayName: create pacts artifact
-
-      # - task: DotNetCoreCLI@2
-      #   displayName: publish
-      #   inputs:
-      #     command: publish
-      #     projects: consumer/consumer/consumer.csproj
-      #     arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-
+        
   - job: publish_pacts
     displayName: publish pacts
     dependsOn: test
