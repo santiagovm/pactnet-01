@@ -61,7 +61,6 @@ stages:
   jobs:
   - job: pact_publish
     displayName: pact publish
-    container: pact_cli
     services:
       pact_cli: pact_cli
     steps:
@@ -82,12 +81,23 @@ stages:
           echo GIT_COMMIT_SHORT_SHA: $(git.commit.short.sha)
           echo PACT_BROKER_BASE_URL: $(pact.broker.base.url)
         displayName: show variables
+      - task: Docker@2
+        displayName: will see
+        inputs:
+          command: login
       - script: |
-          pact-broker publish pacts \
-            --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
-            --tag=$(Build.SourceBranch) \
-            --broker-base-url=$PACT_BROKER_BASE_URL \
-            --broker-token=$PACT_BROKER_API_TOKEN
-        displayName: pact-broker publish
+          docker run --rm pactfoundation/pact-cli:latest pact-broker publish pacts \
+          --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
+          --tag=$(Build.SourceBranch) \
+          --broker-base-url=$PACT_BROKER_BASE_URL \
+          --broker-token=$PACT_BROKER_API_TOKEN
+        displayName: docker run
+      # - script: |
+      #     pact-broker publish pacts \
+      #       --consumer-app-version=$GIT_COMMIT_SHORT_SHA \
+      #       --tag=$(Build.SourceBranch) \
+      #       --broker-base-url=$PACT_BROKER_BASE_URL \
+      #       --broker-token=$PACT_BROKER_API_TOKEN
+      #   displayName: pact-broker publish
         # target:
         #   container: pact_cli
