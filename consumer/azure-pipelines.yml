@@ -16,7 +16,11 @@ pool:
     vmImage: ubuntu-latest
 
 stages:
-- stage: build
+- stage: dev
+  displayName: dev environment
+
+  variables:
+    GIT_COMMIT_SHORT_SHA: value-set-below
 
   jobs:
   - job: test
@@ -47,8 +51,6 @@ stages:
     dependsOn: test
     services:
       pact_cli: pact_cli
-    variables:
-        GIT_COMMIT_SHORT_SHA: value-set-below
     steps:
       - download: current
         artifact: pacts
