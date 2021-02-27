@@ -16,9 +16,22 @@ namespace PactNet01.Provider.Test.Contract
     public class SomethingApiProviderTests : IDisposable
     {
         private const string TestServiceBaseUri = "https://localhost:9001";
-        
+
+        private readonly string ConsumerPactUri;
+        private readonly string PactBrokerApiToken;
+        private readonly string GitCommitShortSha;
+        private readonly bool IsCI;
+
         public SomethingApiProviderTests(ITestOutputHelper outputHelper)
         {
+            // get environment variables
+            DotNetEnv.Env.TraversePath().Load();
+
+            ConsumerPactUri = Environment.GetEnvironmentVariable("CONSUMER_PACT_URI");
+            PactBrokerApiToken = Environment.GetEnvironmentVariable("PACT_BROKER_API_TOKEN");
+            GitCommitShortSha = Environment.GetEnvironmentVariable("GIT_COMMIT_SHORT_SHA");
+            IsCI = "true".Equals(Environment.GetEnvironmentVariable("CI"));
+
             // setup Foo API mock
             _fooApiMockBuilder = new PactBuilder(new PactConfig { SpecificationVersion = "2.0.0" });
             _fooApiMockBuilder.ServiceConsumer("Something API2").HasPactWith("Foo API");
@@ -26,16 +39,16 @@ namespace PactNet01.Provider.Test.Contract
 
             // setup Something API to be tested
             _outputHelper = outputHelper;
-            
+
             _webHost = WebHost
                       .CreateDefaultBuilder()
                       .UseUrls(TestServiceBaseUri)
                       .UseStartup<TestStartup>()
                       .Build();
-            
+
             _webHost.Start();
         }
-        
+
         public void Dispose()
         {
             _webHost.StopAsync().GetAwaiter().GetResult();
@@ -43,21 +56,11 @@ namespace PactNet01.Provider.Test.Contract
 
             _fooApiMockBuilder.Build();
         }
-        
+
         [Fact]
         public void EnsureSomethingApiHonorsContractsWithConsumers()
         {
             // arrange
-            var config = new PactVerifierConfig
-                         {
-                             Outputters = new[]
-                                          {
-                                              new XUnitOutput(_outputHelper)
-                                          },
-                             ProviderVersion = "0.1.0", // santi: git version?
-                             PublishVerificationResults = true,
-                             Verbose = false
-                         };
 
             // setup mocked Foo API
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
@@ -94,27 +97,42 @@ namespace PactNet01.Provider.Test.Contract
                         }
                     }
                 });
-            
+
             // act
             // assert
-            var pactVerifierConsumerXUnit = new PactVerifier(config);
-            var pactVerifierConsumerNUnit = new PactVerifier(config);
-            
-            // santi: use pact broker
-            
-            pactVerifierConsumerXUnit
-               .ProviderState($"{TestServiceBaseUri}/provider-states")
-               .ServiceProvider("Something API", TestServiceBaseUri)
-               .HonoursPactWith("My Consumer")
-               .PactUri(@"../../../../../Consumer/Consumer.Test.XUnit/pacts/my_consumer-something_api.json")
-               .Verify();
+            var config = new PactVerifierConfig
+            {
+                ProviderVersion = GitCommitShortSha,
+                PublishVerificationResults = IsCI,
+                Outputters = new[]
+                                          {
+                                              new XUnitOutput(_outputHelper)
+                                          },
+                Verbose = false
+            };
 
-            pactVerifierConsumerNUnit
-                .ProviderState($"{TestServiceBaseUri}/provider-states")
-                .ServiceProvider("Something API", TestServiceBaseUri)
-                .HonoursPactWith("My Consumer NUnit")
-                .PactUri(@"../../../../../Consumer/Consumer.Test.NUnit/pacts/my_consumer_nunit-something_api.json")
-                .Verify();
+            var pactVerifier = new PactVerifier(config);
+
+            PactUriOptions pactUriOptions = new PactUriOptions()
+                .SetBearerAuthentication(PactBrokerApiToken);
+
+            if (string.IsNullOrWhiteSpace(ConsumerPactUri))
+            {
+                if (IsCI)
+                {
+                    throw new Exception("Missing environment variable CONSUMER_PACT_URI");
+                }
+
+                _outputHelper.WriteLine("test skipped, not running in CI");
+            }
+            else
+            {
+                pactVerifier
+                    .ProviderState($"{TestServiceBaseUri}/provider-states")
+                    .ServiceProvider("Something API", TestServiceBaseUri)
+                    .PactUri(ConsumerPactUri, pactUriOptions)
+                    .Verify();
+            }
         }
 
         private readonly ITestOutputHelper _outputHelper;

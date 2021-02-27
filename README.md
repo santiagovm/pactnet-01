@@ -30,6 +30,7 @@ based on:
   - Consumer-driven contract testing with Pact ([link](https://blog.codecentric.de/en/2019/10/consumer-driven-contract-testing-with-pact/))
   - Message Pact – Contract testing in event-driven applications ([link](https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/))
   - Implementing a consumer-driven contract testing workflow with Pact broker and GitLab CI ([link](https://blog.codecentric.de/en/2020/02/implementing-a-consumer-driven-contract-testing-workflow-with-pact-broker-and-gitlab-ci/))
+- publish provider verification results to a broker ([link](https://github.com/pact-foundation/pact-net#publishing-provider-verification-results-to-a-broker)) 
 
 ### Pact Wiki
 
