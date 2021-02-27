@@ -24,6 +24,7 @@ based on:
 - docker compose sample ([link](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml))
 - pact publish script (powershell) ([link](https://gist.github.com/neilcampbell/bc1fb7d409425894ece0))
 - pact cli ([link](https://hub.docker.com/r/pactfoundation/pact-cli))
+- publish docs ([link](https://github.com/pact-foundation/pact_broker-client#publish))
 - can-i-deploy docs ([link](https://github.com/pact-foundation/pact_broker-client#can-i-deploy))
 - codecentric blog
   - Consumer-driven contract testing with Pact ([link](https://blog.codecentric.de/en/2019/10/consumer-driven-contract-testing-with-pact/))
