@@ -20,14 +20,11 @@ stages:
 
   variables:
   - name: git.commit.short.sha
-    value: not-set
   - name: pact.broker.base.url
-    value: not-set
   - name: pact.broker.api.token
-    value: not-set
 
   jobs:
-  - job: build
+  - job: test
     steps:
       - task: DotNetCoreCLI@2
         displayName: dotnet build
@@ -49,8 +46,8 @@ stages:
       #     projects: consumer/consumer/consumer.csproj
       #     arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
 
-  - job: pact_publish
-    displayName: pact publish
+  - job: publish_pacts
+    displayName: publish pacts
     services:
       pact_cli: pact_cli
     steps:
@@ -71,7 +68,7 @@ stages:
         displayName: set publish variables
       - script: |
           curl -i https://vasquezhouse.pactflow.io
-          curl -i $PACT_BROKER_BASE_URL
+          curl -i $(PACT_BROKER_BASE_URL)
         displayName: debug pactflow acccess
       - script: |
           docker run --rm \
