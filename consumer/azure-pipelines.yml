@@ -47,12 +47,13 @@ stages:
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
-          echo 'sourceVersion: $sourceVersion'
+          echo sourceVersion: $sourceVersion
 
           shortSha=${sourceVersion:0:7}
-          echo 'shortSha: $shortSha'
+          echo shortSha: $shortSha
 
           echo '##vso[task.setvariable variable=CI_COMMIT_SHORT_SHA]$shortSha'  ## set variable for using in next steps
+        displayName: set publish variables
 
   # - job: pact_publish
   #   displayName: pact publish
