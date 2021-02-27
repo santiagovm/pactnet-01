@@ -61,8 +61,8 @@ stages:
   jobs:
   - job: pact_publish
     displayName: pact publish
-    services:
-      pact_cli: pact_cli
+    # services:
+    #   pact_cli: pact_cli
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
