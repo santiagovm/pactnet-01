@@ -19,9 +19,6 @@ stages:
 - stage: dev
   displayName: dev environment
 
-  variables:
-    GIT_COMMIT_SHORT_SHA: value-set-below
-
   jobs:
   - job: test
     steps:
@@ -51,6 +48,8 @@ stages:
     dependsOn: test
     services:
       pact_cli: pact_cli
+    variables:
+      GIT_COMMIT_SHORT_SHA: value-set-below
     steps:
       - download: current
         artifact: pacts
@@ -66,7 +65,7 @@ stages:
           echo shortSha: $shortSha
 
           echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
-        displayName: set publish variables
+        displayName: get commit short sha
       - script: |
           docker run --rm \
             --volume $(Pipeline.Workspace)/pacts:/pacts \
@@ -86,7 +85,18 @@ stages:
     dependsOn: publish_pacts
     services:
       pact_cli: pact_cli
+    variables:
+      GIT_COMMIT_SHORT_SHA: value-set-below
     steps:
+      - script: |
+          sourceVersion=$(Build.SourceVersion)
+          echo sourceVersion: $sourceVersion
+
+          shortSha=${sourceVersion:0:7}
+          echo shortSha: $shortSha
+
+          echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
+        displayName: get commit short sha
       - script: |
           docker run --rm \
             pactfoundation/pact-cli:latest \
