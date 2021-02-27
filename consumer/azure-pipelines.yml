@@ -44,6 +44,7 @@ stages:
 
   - job: publish_pacts
     displayName: publish pacts
+    dependsOn: test
     services:
       pact_cli: pact_cli
     variables:
@@ -80,6 +81,7 @@ stages:
 
   - job: check_pacts
     displayName: check pacts
+    dependsOn: publish_pacts
     services:
       pact_cli: pact_cli
     steps:
@@ -87,7 +89,7 @@ stages:
           docker run --rm \
             pactfoundation/pact-cli:latest \
             broker can-i-deploy \
-            --participant "My Consumer NUnit" \
+            --pacticipant "My Consumer NUnit" \
             --version $GIT_COMMIT_SHORT_SHA \
             --to dev \
             --broker-base-url=$PACT_BROKER_BASE_URL \
