@@ -58,25 +58,11 @@ stages:
           echo shortSha: $shortSha
 
           echo "##vso[task.setvariable variable=gitCommitShortSha]$shortSha"
-          echo "##vso[task.setvariable variable=foo11]$shortSha"
         displayName: set publish variables
-        name: foo
       - script: |
-          echo gitCommitShortSha1: $(gitCommitShortSha)
-          echo gitCommitShortSha2: $gitCommitShortSha
-          echo gitCommitShortSha3: $GITCOMMITSHORTSHA
+          echo gitCommitShortSha: $(gitCommitShortSha)
+          echo Build.SourceBranch: $(Build.SourceBranch)
         displayName: check in same job
-
-  - job: check_vars
-    dependsOn: set_publish_variables
-    variables:
-      bar: $[ dependencies.set_publish_variables.outputs['foo.foo11'] ]
-    steps:
-      - script: |
-          echo bar: $(bar)
-      - script: |
-          echo gitCommitShortSha1: $(gitCommitShortSha)
-          echo gitCommitShortSha2: $[variables.gitCommitShortSha]
 
   # - job: pact_publish
   #   displayName: pact publish
