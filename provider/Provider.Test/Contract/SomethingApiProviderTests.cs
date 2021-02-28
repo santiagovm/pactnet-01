@@ -113,6 +113,13 @@ namespace PactNet01.Provider.Test.Contract
             });
 
             PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
+
+            var consumerVersionSelectors = new List<VersionTagSelector>();
+
+            if (!string.IsNullOrWhiteSpace(pactConsumerName))
+            {
+                consumerVersionSelectors.Add(new VersionTagSelector(pactConsumerTag, pactConsumerName));
+            }
             
             pactVerifier
                 .ProviderState($"{TestServiceBaseUri}/provider-states")
@@ -122,7 +129,7 @@ namespace PactNet01.Provider.Test.Contract
                     pactUriOptions,
                     true,
                     providerVersionTags: new[] { pactProviderTag },
-                    consumerVersionSelectors: new[] { new VersionTagSelector(pactConsumerTag, pactConsumerName) }
+                    consumerVersionSelectors: consumerVersionSelectors 
                 )
                 .Verify();
         }
