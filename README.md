@@ -17,11 +17,13 @@ based on:
 
 ### Pact Broker
 
+- CI/CD pipelines ([link](https://docs.pact.io/pact_nirvana/step_4))
 - docs ([link](https://docs.pact.io/pact_broker))
   - webhooks ([link](https://docs.pact.io/pact_broker/webhooks))
   - pactflow webhooks ([link](https://docs.pactflow.io/docs/user-interface/settings/webhooks/))
   - tags ([link](https://docs.pact.io/pact_broker/tags))
   - setup checklist ([link](https://docs.pact.io/pact_broker/set_up_checklist/))
+- wiki ([link](https://github.com/pact-foundation/pact_broker/wiki))
 - dockerised pact broker ([link](https://hub.docker.com/r/pactfoundation/pact-broker))
 - docker compose sample ([link](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml))
 - pact publish script (powershell) ([link](https://gist.github.com/neilcampbell/bc1fb7d409425894ece0))
@@ -33,6 +35,13 @@ based on:
   - Message Pact – Contract testing in event-driven applications ([link](https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/))
   - Implementing a consumer-driven contract testing workflow with Pact broker and GitLab CI ([link](https://blog.codecentric.de/en/2020/02/implementing-a-consumer-driven-contract-testing-workflow-with-pact-broker-and-gitlab-ci/))
 - publish provider verification results to a broker ([link](https://github.com/pact-foundation/pact-net#publishing-provider-verification-results-to-a-broker))
+- pactflow univeristy ([link](https://docs.pactflow.io/docs/workshops/))
+- code samples ([link](https://docs.pactflow.io/docs/examples))
+- videos
+  - Pact tests: how we split up the monolithic deploy by Phil Hardwick ([link](https://www.youtube.com/watch?v=0sSy8ZTsW64))
+  - Verifying Microservice Integrations with Contract Testing - Atlassian Summit 2016 ([link](https://www.youtube.com/watch?v=-6x6XBDf9sQ))
+  - microXchg 2017 - Alon Pe'er: Move Fast and Consumer Driven Contract Test Things ([link](https://www.youtube.com/watch?v=nQ0UGY2-YYI))
+  - YOW! 2017 Beth Skurrie - It's Not Hard to Test Smart: Delivering Customer Value Faster #YOW ([link](https://www.youtube.com/watch?v=79GKBYSqMIo))
 
 #### Pact Broker Webhooks
 

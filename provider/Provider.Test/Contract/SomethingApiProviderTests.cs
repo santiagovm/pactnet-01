@@ -112,6 +112,9 @@ namespace PactNet01.Provider.Test.Contract
                 Verbose = true
             });
 
+            // todo: compare with this sample
+            // https://github.com/pactflow/example-provider-dotnet/blob/11285b385f6afca6e2484f31d894065b2165072d/tests/ProviderApiTests.cs#L56
+
             PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
 
             var consumerVersionSelectors = new List<VersionTagSelector>();
@@ -130,7 +133,9 @@ namespace PactNet01.Provider.Test.Contract
                     true,
                     new []{ "ref/heads/main", "dev", "uat", "prod" },
                     new[] { pactProviderTag },
-                    consumerVersionSelectors 
+                    // consumerVersionSelectors: [{ tag: 'master', latest: true }, { tag: 'prod', latest: true } ],
+                    // from https://katacoda.com/pact/scenarios/pactflow-can-i-deploy-js
+                    consumerVersionSelectors
                 )
                 .Verify();
         }
