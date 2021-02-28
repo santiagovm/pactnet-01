@@ -20,6 +20,7 @@ based on:
 - docs ([link](https://docs.pact.io/pact_broker))
   - webhooks ([link](https://docs.pact.io/pact_broker/webhooks))
   - pactflow webhooks ([link](https://docs.pactflow.io/docs/user-interface/settings/webhooks/))
+  - tags ([link](https://docs.pact.io/pact_broker/tags))
   - setup checklist ([link](https://docs.pact.io/pact_broker/set_up_checklist/))
 - dockerised pact broker ([link](https://hub.docker.com/r/pactfoundation/pact-broker))
 - docker compose sample ([link](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml))
