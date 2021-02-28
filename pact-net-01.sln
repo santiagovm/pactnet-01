@@ -14,12 +14,21 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer.Test.XUnit", "consumer\Consumer.Test.XUnit\Consumer.Test.XUnit.csproj", "{F3E9577D-26E9-4383-9EF9-0E906E30C351}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provider", "Provider", "{F92AD1A8-B7FE-4CCE-8350-282F569E23E0}"
+ProjectSection(SolutionItems) = preProject
+	provider\azure-pipelines-pacts-verify.yml = provider\azure-pipelines-pacts-verify.yml
+	provider\azure-pipelines.yml = provider\azure-pipelines.yml
+EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "provider", "provider\provider\provider.csproj", "{4103C32C-313E-4E11-87D2-C71E2D006FB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Test", "provider\Provider.Test\Provider.Test.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer.Test.NUnit", "consumer\Consumer.Test.NUnit\Consumer.Test.NUnit.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{1D079217-598B-4A41-B4BD-B5C24CBE8882}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
