@@ -4,8 +4,6 @@ resources:
   webhooks:
   - webhook: test-webhook-05
     connection: test-connection-05
-    variables:
-      consumerPactUri: "$.consumerPactUri"
 
 pool:
     vmImage: ubuntu-latest
@@ -27,8 +25,11 @@ stages:
 
           echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
         displayName: get commit short sha
-      - script: |
-          echo consumerPactUri: $(consumerPactUri)
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            Write-Host ${{ parameters.test-webhook-05.consumerPactUri}}
         displayName: debug webhook payload
       - script: |
           dotnet test provider/Provider.Test/Provider.Test.csproj --configuration Release
