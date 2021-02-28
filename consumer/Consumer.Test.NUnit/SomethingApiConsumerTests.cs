@@ -32,7 +32,7 @@ namespace PactNet01.Consumer.Test.NUnit
         {
             // arrange
             const string expectedId = "83F9262F-28F1-4703-AB1A-8CFD9E8249C9";
-            const string expectedFirstName = "some-first-name-02";
+            const string expectedFirstName = "some-first-name-03";
             const string expectedLastName = "some-last-name";
 
             var expectedSomething = new Something(expectedId, expectedFirstName, expectedLastName);
