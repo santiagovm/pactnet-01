@@ -1,6 +1,10 @@
 trigger: none
 
-# resources:
+resources:
+  webhooks:
+  - webhook: test-03-webhook
+    connection: test-03-connection
+    
 #   webhooks:
 #   - webhook: test-01
 #     connection: vasquez-house-pactflow
