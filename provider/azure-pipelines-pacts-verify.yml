@@ -1,12 +1,12 @@
 trigger: none
 
-resources:
-  webhooks:
-  - webhook: test-01
-    connection: vasquez-house-pactflow
-    filters:
-    - path: consumerPactUri
-      value: not-set
+# resources:
+#   webhooks:
+#   - webhook: test-01
+#     connection: vasquez-house-pactflow
+#     filters:
+#     - path: consumerPactUri
+#       value: not-set
 
 pool:
     vmImage: ubuntu-latest
