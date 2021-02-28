@@ -128,8 +128,9 @@ namespace PactNet01.Provider.Test.Contract
                     pactBrokerBaseUrl,
                     pactUriOptions,
                     true,
-                    providerVersionTags: new[] { pactProviderTag },
-                    consumerVersionSelectors: consumerVersionSelectors 
+                    new []{ "ref/heads/main", "dev", "uat", "prod" },
+                    new[] { pactProviderTag },
+                    consumerVersionSelectors 
                 )
                 .Verify();
         }
