@@ -1,8 +1,3 @@
-parameters:
-- name: test-webhook-05
-  displayName: webhook payload
-  type: object
-
 trigger: none
 
 resources:
@@ -20,7 +15,6 @@ stages:
   - job: test
     variables:
       GIT_COMMIT_SHORT_SHA: value-set-below
-      CONSUMER_PACT_URI1: ${{parameters.test-webhook-05.consumerPactUri}}
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
@@ -32,14 +26,14 @@ stages:
           echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
         displayName: get commit short sha
       - script: |
-          echo CONSUMER_PACT_URI1: $(CONSUMER_PACT_URI1)
+          echo parameters.test-webhook-05.consumerPactUri: ${{ parameters.test-webhook-05.consumerPactUri}}
         displayName: debug webhook payload
       - script: |
           dotnet test provider/Provider.Test/Provider.Test.csproj --configuration Release
         displayName: dotnet test
         env:
           PROVIDER_FOO_API_BASE_URI: http://localhost:9333
-          CONSUMER_PACT_URI: $(parameters.test-webhook-05.consumerPactUri)
+          CONSUMER_PACT_URI: foo
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
           GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
           CI: true
