@@ -1,12 +1,14 @@
+parameters:
+- name: test-webhook-05
+  displayName: webhook payload
+  type: object
+
 trigger: none
 
 resources:
   webhooks:
   - webhook: test-webhook-05
     connection: test-connection-05
-    # filters:
-    # - path: consumerPactUri
-    #   value: not-set
 
 pool:
     vmImage: ubuntu-latest
@@ -18,7 +20,7 @@ stages:
   - job: test
     variables:
       GIT_COMMIT_SHORT_SHA: value-set-below
-      CONSUMER_PACT_URI1: $(parameters.test-webhook-05.consumerPactUri)
+      CONSUMER_PACT_URI1: ${{parameters.test-webhook-05.consumerPactUri}}
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
