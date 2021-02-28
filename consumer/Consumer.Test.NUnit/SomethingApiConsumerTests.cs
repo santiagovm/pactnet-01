@@ -32,15 +32,15 @@ namespace PactNet01.Consumer.Test.NUnit
         {
             // arrange
             const string expectedId = "83F9262F-28F1-4703-AB1A-8CFD9E8249C9";
-            const string expectedFirstName = "some-first-name";
+            const string expectedFirstName = "some-first-name-02";
             const string expectedLastName = "some-last-name";
 
             var expectedSomething = new Something(expectedId, expectedFirstName, expectedLastName);
-            
+
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
             _mockProviderService
-                .Given("There is a something with id 'tester")
+                .Given("There is a something with id 'tester'")
                 .UponReceiving("A GET request to retrieve something")
                 .With(new ProviderServiceRequest
                 {
@@ -71,7 +71,7 @@ namespace PactNet01.Consumer.Test.NUnit
             var consumer = new SomethingApiClient($"http://localhost:{MockServerPort}");
 
             // act
-            Something actualSomething = await consumer.GetSomething(expectedId);
+            Something actualSomething = await consumer.GetSomething(expectedId).ConfigureAwait(false);
 
             // assert
             _mockProviderService.VerifyInteractions();
