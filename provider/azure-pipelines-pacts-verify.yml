@@ -4,13 +4,9 @@ resources:
   webhooks:
   - webhook: test-webhook-05
     connection: test-connection-05
-
-#   webhooks:
-#   - webhook: test-01
-#     connection: vasquez-house-pactflow
-#     filters:
-#     - path: consumerPactUri
-#       value: not-set
+    filters:
+    - path: consumerPactUri
+      value: not-set
 
 pool:
     vmImage: ubuntu-latest
@@ -22,7 +18,7 @@ stages:
   - job: test
     variables:
       GIT_COMMIT_SHORT_SHA: value-set-below
-      CONSUMER_PACT_URI1: $[parameters.test-webhook-05.consumerPactUri]
+      CONSUMER_PACT_URI1: $(parameters.test-webhook-05.consumerPactUri)
     steps:
       - script: |
           sourceVersion=$(Build.SourceVersion)
