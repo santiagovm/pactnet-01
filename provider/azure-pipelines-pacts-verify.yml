@@ -29,7 +29,7 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            Write-Host ${{ parameters.test-webhook-05.consumerPactUri}}
+            Write-Host ${{ parameters.consumerPactUri}}
         displayName: debug webhook payload
       - script: |
           dotnet test provider/Provider.Test/Provider.Test.csproj --configuration Release
