@@ -19,6 +19,7 @@ based on:
 
 - docs ([link](https://docs.pact.io/pact_broker))
   - webhooks ([link](https://docs.pact.io/pact_broker/webhooks))
+  - pactflow webhooks ([link](https://docs.pactflow.io/docs/user-interface/settings/webhooks/))
   - setup checklist ([link](https://docs.pact.io/pact_broker/set_up_checklist/))
 - dockerised pact broker ([link](https://hub.docker.com/r/pactfoundation/pact-broker))
 - docker compose sample ([link](https://github.com/pact-foundation/pact-broker-docker/blob/master/docker-compose.yml))
@@ -30,7 +31,7 @@ based on:
   - Consumer-driven contract testing with Pact ([link](https://blog.codecentric.de/en/2019/10/consumer-driven-contract-testing-with-pact/))
   - Message Pact – Contract testing in event-driven applications ([link](https://blog.codecentric.de/en/2019/11/message-pact-contract-testing-in-event-driven-applications/))
   - Implementing a consumer-driven contract testing workflow with Pact broker and GitLab CI ([link](https://blog.codecentric.de/en/2020/02/implementing-a-consumer-driven-contract-testing-workflow-with-pact-broker-and-gitlab-ci/))
-- publish provider verification results to a broker ([link](https://github.com/pact-foundation/pact-net#publishing-provider-verification-results-to-a-broker)) 
+- publish provider verification results to a broker ([link](https://github.com/pact-foundation/pact-net#publishing-provider-verification-results-to-a-broker))
 
 #### Pact Broker Webhooks
 
@@ -70,3 +71,4 @@ Based on dotnet-env ([link 1](https://github.com/tonerdo/dotnet-env) | [link 2](
 - Predefined variables ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml))
 - Set variables in the pipeline ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#setvariable-initialize-or-modify-the-value-of-a-variable))
 - Service Containers ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml))
+- Trigger pipeline via webhooks ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=example#resources-webhooks))
