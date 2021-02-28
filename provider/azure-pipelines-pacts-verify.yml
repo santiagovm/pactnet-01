@@ -4,9 +4,9 @@ resources:
   webhooks:
   - webhook: test-webhook-05
     connection: test-connection-05
-    filters:
-    - path: consumerPactUri
-      value: not-set
+    # filters:
+    # - path: consumerPactUri
+    #   value: not-set
 
 pool:
     vmImage: ubuntu-latest
