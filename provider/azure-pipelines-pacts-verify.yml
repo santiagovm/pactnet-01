@@ -29,8 +29,11 @@ stages:
           dotnet test provider/Provider.Test/Provider.Test.csproj --configuration Release
         displayName: dotnet test
         env:
-          PROVIDER_FOO_API_BASE_URI: http://localhost:9333
-          CONSUMER_PACT_URI: ${{ parameters.pact_content_changed.consumerPactUri }}
-          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
-          GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
           CI: true
+          PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
+          PACT_CONSUMER_NAME: ${{parameters.pact_content_changed.consumerName}}
+          PACT_CONSUMER_TAG: ${{parameters.pact_content_changed.consumerTag}}
+          PACT_PROVIDER_TAG: $(Build.SourceBranchName)
+          GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
+          PROVIDER_FOO_API_BASE_URI: http://localhost:9333 # todo: hardcode this value in the test

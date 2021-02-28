@@ -16,22 +16,9 @@ namespace PactNet01.Provider.Test.Contract
     public class SomethingApiProviderTests : IDisposable
     {
         private const string TestServiceBaseUri = "https://localhost:9001";
-
-        private readonly string ConsumerPactUri;
-        private readonly string PactBrokerApiToken;
-        private readonly string GitCommitShortSha;
-        private readonly bool IsCI;
-
+        
         public SomethingApiProviderTests(ITestOutputHelper outputHelper)
         {
-            // get environment variables
-            DotNetEnv.Env.TraversePath().Load();
-
-            ConsumerPactUri = Environment.GetEnvironmentVariable("CONSUMER_PACT_URI");
-            PactBrokerApiToken = Environment.GetEnvironmentVariable("PACT_BROKER_API_TOKEN");
-            GitCommitShortSha = Environment.GetEnvironmentVariable("GIT_COMMIT_SHORT_SHA");
-            IsCI = "true".Equals(Environment.GetEnvironmentVariable("CI"));
-
             // setup Foo API mock
             _fooApiMockBuilder = new PactBuilder(new PactConfig { SpecificationVersion = "2.0.0" });
             _fooApiMockBuilder.ServiceConsumer("Something API2").HasPactWith("Foo API");
@@ -58,10 +45,10 @@ namespace PactNet01.Provider.Test.Contract
         }
 
         [Fact]
-        public void EnsureSomethingApiHonorsContractsWithConsumers()
+        public void PactflowWebhook_EnsureSomethingApiHonorsContractsWithPublishedPact()
         {
             // arrange
-
+            
             // setup mocked Foo API
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
@@ -97,42 +84,47 @@ namespace PactNet01.Provider.Test.Contract
                         }
                     }
                 });
-
+            
+            // get environment variables
+            DotNetEnv.Env.TraversePath().Load();
+            
+            bool isCI = "true".Equals(Environment.GetEnvironmentVariable("CI"));
+            string pactBrokerBaseUrl = Environment.GetEnvironmentVariable("PACT_BROKER_BASE_URL");
+            string pactBrokerApiToken = Environment.GetEnvironmentVariable("PACT_BROKER_API_TOKEN");
+            string pactConsumerName = Environment.GetEnvironmentVariable("PACT_CONSUMER_NAME");
+            string pactConsumerTag = Environment.GetEnvironmentVariable("PACT_CONSUMER_TAG");
+            string pactProviderTag = Environment.GetEnvironmentVariable("PACT_PROVIDER_TAG");
+            string gitCommitShortSha = Environment.GetEnvironmentVariable("GIT_COMMIT_SHORT_SHA");
+            
+            if (!isCI)
+            {
+                _outputHelper.WriteLine("test skipped, this test is intended to run only in CI triggered by pactflow webhook");
+                return;
+            }
+            
             // act
             // assert
-            var config = new PactVerifierConfig
+            var pactVerifier = new PactVerifier(new PactVerifierConfig
             {
-                ProviderVersion = GitCommitShortSha,
-                PublishVerificationResults = IsCI,
-                Outputters = new[]
-                                          {
-                                              new XUnitOutput(_outputHelper)
-                                          },
-                Verbose = false
-            };
+                ProviderVersion = gitCommitShortSha,
+                PublishVerificationResults = isCI,
+                Outputters = new[] { new XUnitOutput(_outputHelper) },
+                Verbose = true
+            });
 
-            var pactVerifier = new PactVerifier(config);
-
-            PactUriOptions pactUriOptions = new PactUriOptions()
-                .SetBearerAuthentication(PactBrokerApiToken);
-
-            if (string.IsNullOrWhiteSpace(ConsumerPactUri))
-            {
-                if (IsCI)
-                {
-                    throw new Exception("Missing environment variable CONSUMER_PACT_URI");
-                }
-
-                _outputHelper.WriteLine("test skipped, not running in CI");
-            }
-            else
-            {
-                pactVerifier
-                    .ProviderState($"{TestServiceBaseUri}/provider-states")
-                    .ServiceProvider("Something API", TestServiceBaseUri)
-                    .PactUri(ConsumerPactUri, pactUriOptions)
-                    .Verify();
-            }
+            PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
+            
+            pactVerifier
+                .ProviderState($"{TestServiceBaseUri}/provider-states")
+                .ServiceProvider("Something API", TestServiceBaseUri)
+                .PactBroker(
+                    pactBrokerBaseUrl,
+                    pactUriOptions,
+                    true,
+                    providerVersionTags: new[] { pactProviderTag },
+                    consumerVersionSelectors: new[] { new VersionTagSelector(pactConsumerTag, pactConsumerName) }
+                )
+                .Verify();
         }
 
         private readonly ITestOutputHelper _outputHelper;
