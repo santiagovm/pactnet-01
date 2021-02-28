@@ -32,6 +32,19 @@ based on:
   - Implementing a consumer-driven contract testing workflow with Pact broker and GitLab CI ([link](https://blog.codecentric.de/en/2020/02/implementing-a-consumer-driven-contract-testing-workflow-with-pact-broker-and-gitlab-ci/))
 - publish provider verification results to a broker ([link](https://github.com/pact-foundation/pact-net#publishing-provider-verification-results-to-a-broker)) 
 
+#### Pact Broker Webhooks
+
+Pact Content Changed
+
+```shell
+curl --location --request POST 'https://dev.azure.com/santi-azure-devops-01/_apis/public/distributedtask/webhooks/pact_content_changed?api-version=6.1-preview' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: VstsSession=%7B%22PersistentSessionId%22%3A%227b562f9d-f74e-4021-9f02-4f0c34da9870%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D; X-VSS-UseRequestRouting=True' \
+--data-raw '{
+    "consumerPactUri": "https://vasquezhouse.pactflow.io/pacts/provider/Something%20API/consumer/My%20Consumer%20NUnit/latest/refs%2Fheads%2Fmain"
+}'
+```
+
 ### Pact Wiki
 
 - development workflow ([link](https://github.com/pact-foundation/pact-ruby/wiki/Development-workflow))

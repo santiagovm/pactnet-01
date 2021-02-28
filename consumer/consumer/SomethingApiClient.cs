@@ -37,7 +37,7 @@ namespace PactNet01.Consumer
             request.Headers.Add("Accept", "application/json");
 
             using var httpClient = new HttpClient();
-            using HttpResponseMessage response = await httpClient.SendAsync(request);
+            using HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             HttpStatusCode status = response.StatusCode;
 
@@ -46,14 +46,14 @@ namespace PactNet01.Consumer
                 throw new Exception(response.ReasonPhrase);
             }
 
-            await using Stream stream = await response.Content.ReadAsStreamAsync();
+            await using Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
 
-            return await JsonSerializer.DeserializeAsync<Something>(stream, options);
+            return await JsonSerializer.DeserializeAsync<Something>(stream, options).ConfigureAwait(false);
         }
 
         private readonly string _baseUri;
