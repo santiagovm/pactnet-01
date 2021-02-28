@@ -2,8 +2,8 @@ trigger: none
 
 resources:
   webhooks:
-  - webhook: test-04-webhook
-    connection: test-04-connection
+  - webhook: test-webhook-05
+    connection: test-connection-05
 
 #   webhooks:
 #   - webhook: test-01
@@ -37,7 +37,7 @@ stages:
         displayName: dotnet test
         env:
           PROVIDER_FOO_API_BASE_URI: http://localhost:9333
-          CONSUMER_PACT_URI: ${{parameters.test-04-webhook.consumerPactUri}}
+          CONSUMER_PACT_URI: ${{parameters.test-webhook-05.consumerPactUri}}
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
           GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
           CI: true
