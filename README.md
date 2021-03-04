@@ -82,3 +82,9 @@ Based on dotnet-env ([link 1](https://github.com/tonerdo/dotnet-env) | [link 2](
 - Set variables in the pipeline ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/scripts/logging-commands?view=azure-devops&tabs=bash#setvariable-initialize-or-modify-the-value-of-a-variable))
 - Service Containers ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml))
 - Trigger pipeline via webhooks ([link](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=example#resources-webhooks))
+
+# OpenAPI Specification
+
+- https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-3.1
+- https://ivanstambuk.github.io/azure/2020/10/16/Automatically-generation-OpenAPI-specification-in-ASP.NET.html
+- https://github.com/domaindrivendev/Swashbuckle.AspNetCore

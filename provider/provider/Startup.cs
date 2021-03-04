@@ -1,8 +1,10 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using PactNet01.Provider.FooIntegration;
 
 namespace PactNet01.Provider
@@ -22,6 +24,28 @@ namespace PactNet01.Provider
             services.AddScoped(provider => new FooApiClient(FooApiConfiguration.BaseUri));
 
             services.AddControllers();
+
+            services.AddSwaggerGen(options =>
+                                   {
+                                       options.SwaggerDoc("v1", new OpenApiInfo
+                                                                {
+                                                                    Version = "v1",
+                                                                    Title = "Something API",
+                                                                    Description = "Something API description goes here",
+                                                                    TermsOfService = new Uri("http://google.com/terms"),
+                                                                    Contact = new OpenApiContact
+                                                                              {
+                                                                                  Name = "John Smith",
+                                                                                  Email = "jsmith@foo.com",
+                                                                                  Url = new Uri("https://twitter.com/foo")
+                                                                              },
+                                                                    License = new OpenApiLicense
+                                                                              {
+                                                                                  Name = "Use MIT",
+                                                                                  Url = new Uri("https://example.com/license")
+                                                                              }
+                                                                });
+                                   });
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,6 +56,13 @@ namespace PactNet01.Provider
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+                             {
+                                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Something API v1");
+                                 options.RoutePrefix = string.Empty;
+                             });
 
             app.UseRouting();
 
