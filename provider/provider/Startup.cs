@@ -25,27 +25,29 @@ namespace PactNet01.Provider
 
             services.AddControllers();
 
-            services.AddSwaggerGen(options =>
-                                   {
-                                       options.SwaggerDoc("v1", new OpenApiInfo
-                                                                {
-                                                                    Version = "v1",
-                                                                    Title = "Something API",
-                                                                    Description = "Something API description goes here",
-                                                                    TermsOfService = new Uri("http://google.com/terms"),
-                                                                    Contact = new OpenApiContact
-                                                                              {
-                                                                                  Name = "John Smith",
-                                                                                  Email = "jsmith@foo.com",
-                                                                                  Url = new Uri("https://twitter.com/foo")
-                                                                              },
-                                                                    License = new OpenApiLicense
-                                                                              {
-                                                                                  Name = "Use MIT",
-                                                                                  Url = new Uri("https://example.com/license")
-                                                                              }
-                                                                });
-                                   });
+            services.AddSwaggerGen();
+
+           // services.AddSwaggerGen(options =>
+           //                        {
+           //                            options.SwaggerDoc("v1", new OpenApiInfo
+           //                                {
+           //                                    Version = "v1",
+           //                                    Title = "Something API",
+           //                                    Description = "Something API description goes here",
+           //                                    TermsOfService = new Uri("http://google.com/terms"),
+           //                                    Contact = new OpenApiContact
+           //                                        {
+           //                                            Name = "John Smith",
+           //                                            Email = "jsmith@foo.com",
+           //                                            Url = new Uri("https://twitter.com/foo")
+           //                                        },
+           //                                    License = new OpenApiLicense
+           //                                        {
+           //                                            Name = "Use MIT",
+           //                                            Url = new Uri("https://example.com/license")
+           //                                        }
+           //                                });
+           //                        });
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)

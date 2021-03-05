@@ -88,3 +88,10 @@ Based on dotnet-env ([link 1](https://github.com/tonerdo/dotnet-env) | [link 2](
 - https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-3.1
 - https://ivanstambuk.github.io/azure/2020/10/16/Automatically-generation-OpenAPI-specification-in-ASP.NET.html
 - https://github.com/domaindrivendev/Swashbuckle.AspNetCore
+
+Generate OpenAPI Spec file
+
+```shell
+dotnet swagger tofile provider/provider/bin/Debug/netcoreapp3.1/provider.dll "v1"
+dotnet swagger --output dist/oas.json tofile provider/provider/bin/Debug/netcoreapp3.1/provider.dll "v1"
+```
