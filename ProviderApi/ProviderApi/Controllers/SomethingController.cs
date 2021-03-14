@@ -20,7 +20,7 @@ namespace PactNet01.ProviderApi.Controllers
             Foo[] foos = await _fooApiClient.GetFoo(new FooQuery(id));
             Foo theFoo = foos[0];
 
-            var something = new Something(theFoo.Id, theFoo.Name, theFoo.Description);
+            var something = new Something(theFoo.Id, theFoo.Name, theFoo.Description, 10);
 
             return new OkObjectResult(something);
         }

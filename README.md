@@ -42,6 +42,7 @@ based on:
   - Verifying Microservice Integrations with Contract Testing - Atlassian Summit 2016 ([link](https://www.youtube.com/watch?v=-6x6XBDf9sQ))
   - microXchg 2017 - Alon Pe'er: Move Fast and Consumer Driven Contract Test Things ([link](https://www.youtube.com/watch?v=nQ0UGY2-YYI))
   - YOW! 2017 Beth Skurrie - It's Not Hard to Test Smart: Delivering Customer Value Faster #YOW ([link](https://www.youtube.com/watch?v=79GKBYSqMIo))
+- pending pacts ([link 1](http://blog.pact.io/2020/02/24/how-we-have-fixed-the-biggest-problem-with-the-pact-workflow/) | [link 2](https://docs.pact.io/pact_broker/advanced_topics/pending_pacts/))
 
 #### Pact Broker Webhooks
 
