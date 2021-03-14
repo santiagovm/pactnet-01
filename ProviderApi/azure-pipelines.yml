@@ -23,6 +23,29 @@ stages:
   displayName: dev environment
 
   jobs:
+  - job: santi_test_1
+    displayName: santi test 1
+    steps:
+      - script: |
+          sourceVersion=$(Build.SourceVersion)
+          echo sourceVersion: $sourceVersion
+
+          shortSha=${sourceVersion:0:7}
+          echo shortSha: $shortSha
+
+          echo "##vso[task.setvariable variable=SANTI_GIT_COMMIT_SHORT_SHA;isOutput=true;]$shortSha"
+        displayName: create variable to share
+
+  - job: santi_test_2
+    displayName: santi test 2
+    dependsOn: santi_test_1
+    variables:
+      santiVar2: $[ dependencies.santi_test_1.outputs['SANTI_GIT_COMMIT_SHORT_SHA'] ]
+    steps:
+      - script: |
+          echo var: $santiVar2
+        displayName: show shared variable
+        
   - job: test
     variables:
       GIT_COMMIT_SHORT_SHA: value-set-below
