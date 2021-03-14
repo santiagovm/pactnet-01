@@ -131,12 +131,14 @@ namespace PactNet01.ProviderApi.Test.Contract
                     pactBrokerBaseUrl,
                     pactUriOptions,
                     true,
-                    new []{ "ref/heads/main", "dev", "uat", "prod" },
-                    new[] { pactProviderTag },
+                    // santi: clean up
+                    // consumerVersionTags was not returning pacts, when commented out started working
+                    // consumerVersionTags: new []{ "ref/heads/main", "dev", "uat", "prod" },
+                    providerVersionTags: new[] { pactProviderTag },
                     // santi: review this
                     // consumerVersionSelectors: [{ tag: 'master', latest: true }, { tag: 'prod', latest: true } ],
                     // from https://katacoda.com/pact/scenarios/pactflow-can-i-deploy-js
-                    consumerVersionSelectors
+                    consumerVersionSelectors: consumerVersionSelectors
                 )
                 .Verify();
         }
