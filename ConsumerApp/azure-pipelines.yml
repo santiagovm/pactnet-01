@@ -98,7 +98,7 @@ stages:
             --broker-base-url=$PACT_BROKER_BASE_URL \
             --broker-token=$PACT_BROKER_API_TOKEN \
             --retry-while-unknown 2 \
-            --retry-interval 30 \
+            --retry-interval 10 \
             --verbose
         displayName: pact-broker can-i-deploy
         env:
@@ -169,7 +169,7 @@ stages:
               --broker-base-url=$PACT_BROKER_BASE_URL \
               --broker-token=$PACT_BROKER_API_TOKEN \
               --retry-while-unknown 2 \
-              --retry-interval 30 \
+              --retry-interval 10 \
               --verbose
           displayName: pact-broker can-i-deploy
           env:
