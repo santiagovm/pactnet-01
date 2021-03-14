@@ -46,25 +46,27 @@ namespace PactNet01.ProviderApi.Test.Contract.Plumbing
             {
                 return;
             }
-
-            var providerState = await JsonSerializer.DeserializeAsync<ProviderState>(context.Request.Body);
-
-            if (providerState == null)
-            {
-                return;
-            }
-
-            if (string.IsNullOrEmpty(providerState.State))
-            {
-                return;
-            }
-
-            if (providerState.Consumer != "Consumer")
-            {
-                return;
-            }
             
-            _providerStates[providerState.State].Invoke();
+            // code below is a sample of how to change app state for contract tests based on the "Given" part of the contract
+
+            // var providerState = await JsonSerializer.DeserializeAsync<ProviderState>(context.Request.Body);
+            //
+            // if (providerState == null)
+            // {
+            //     return;
+            // }
+            //
+            // if (string.IsNullOrEmpty(providerState.State))
+            // {
+            //     return;
+            // }
+            //
+            // if (providerState.Consumer != "Consumer")
+            // {
+            //     return;
+            // }
+            //
+            // _providerStates[providerState.State].Invoke();
         }
         
         private static void RemoveAllData()
