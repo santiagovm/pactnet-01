@@ -88,59 +88,58 @@ namespace PactNet01.ProviderApi.Test.Contract
             // get environment variables
             DotNetEnv.Env.TraversePath().Load();
             
-            bool isCI = "true".Equals(Environment.GetEnvironmentVariable("CI"));
+            bool isRunningInPipeline = "true".Equals(Environment.GetEnvironmentVariable("CI"));
             string pactBrokerBaseUrl = Environment.GetEnvironmentVariable("PACT_BROKER_BASE_URL");
             string pactBrokerApiToken = Environment.GetEnvironmentVariable("PACT_BROKER_API_TOKEN");
             string pactConsumerName = Environment.GetEnvironmentVariable("PACT_CONSUMER_NAME");
             string pactConsumerTag = Environment.GetEnvironmentVariable("PACT_CONSUMER_TAG");
             string pactProviderTag = Environment.GetEnvironmentVariable("PACT_PROVIDER_TAG");
             string gitCommitShortSha = Environment.GetEnvironmentVariable("GIT_COMMIT_SHORT_SHA");
-            
-            if (!isCI)
-            {
-                _outputHelper.WriteLine("test skipped, this test is intended to run only in CI triggered by pactflow webhook");
-                return;
-            }
-            
+
             // act
             // assert
             var pactVerifier = new PactVerifier(new PactVerifierConfig
             {
                 ProviderVersion = gitCommitShortSha,
-                PublishVerificationResults = isCI,
+                PublishVerificationResults = isRunningInPipeline,
                 Outputters = new[] { new XUnitOutput(_outputHelper) },
                 Verbose = true
             });
-
-            // santi: compare with this sample
-            // https://github.com/pactflow/example-provider-dotnet/blob/11285b385f6afca6e2484f31d894065b2165072d/tests/ProviderApiTests.cs#L56
 
             PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
 
             var consumerVersionSelectors = new List<VersionTagSelector>();
 
-            if (!string.IsNullOrWhiteSpace(pactConsumerName))
+            // pactConsumerName is provided to pipeline triggered by pactflow webhook indicating what consumer published a new contract for verification
+            // if value is missing then default verification is performed for all consumers with tags: main, dev, uat, prod
+            if (string.IsNullOrWhiteSpace(pactConsumerName))
             {
-                consumerVersionSelectors.Add(new VersionTagSelector(pactConsumerTag, pactConsumerName));
+                consumerVersionSelectors.AddRange(new[]
+                                                  {
+                                                      new VersionTagSelector("refs/heads/main", latest: true),
+                                                      new VersionTagSelector("dev", latest: true),
+                                                      new VersionTagSelector("uat", latest: true),
+                                                      new VersionTagSelector("prod", latest: true)
+                                                  });
             }
-            
+            else
+            {
+                // santi: example below shows a more precise way to target the specific pact to verify
+                // https://github.com/pactflow/example-provider-dotnet/blob/11285b385f6afca6e2484f31d894065b2165072d/tests/ProviderApiTests.cs#L56
+                consumerVersionSelectors.Add(new VersionTagSelector(pactConsumerTag, pactConsumerName, latest: true));
+            }
+
             pactVerifier
-                .ProviderState($"{TestServiceBaseUri}/provider-states")
-                .ServiceProvider("Provider API", TestServiceBaseUri)
-                .PactBroker(
-                    pactBrokerBaseUrl,
-                    pactUriOptions,
-                    true,
-                    // santi: clean up
-                    // consumerVersionTags was not returning pacts, when commented out started working
-                    // consumerVersionTags: new []{ "ref/heads/main", "dev", "uat", "prod" },
-                    providerVersionTags: new[] { pactProviderTag },
-                    // santi: review this
-                    // consumerVersionSelectors: [{ tag: 'master', latest: true }, { tag: 'prod', latest: true } ],
-                    // from https://katacoda.com/pact/scenarios/pactflow-can-i-deploy-js
-                    consumerVersionSelectors: consumerVersionSelectors
-                )
-                .Verify();
+               .ProviderState($"{TestServiceBaseUri}/provider-states")
+               .ServiceProvider("Provider API", TestServiceBaseUri)
+               .PactBroker(
+                           pactBrokerBaseUrl,
+                           pactUriOptions,
+                           true,
+                           providerVersionTags: new[] { pactProviderTag },
+                           consumerVersionSelectors: consumerVersionSelectors
+                          )
+               .Verify();
         }
 
         private readonly ITestOutputHelper _outputHelper;
