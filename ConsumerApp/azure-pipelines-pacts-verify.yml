@@ -1,0 +1,90 @@
+trigger: none
+
+resources:
+  webhooks:
+    - webhook: provider_verification_succeeded
+      connection: vasquez_house_pactflow_provider_verification_succeeded
+      filters:
+        - path: consumerName
+          value: Consumer App
+  containers:
+    - container: pact_cli
+      image: pactfoundation/pact-cli:latest
+
+pool:
+    vmImage: ubuntu-latest
+    
+variables:
+  - group: pactflow-variables
+
+stages:
+- stage: dev
+  displayName: dev environment
+
+  jobs:
+  - job: can_i_deploy
+    displayName: can i deploy
+    services:
+      pact_cli: pact_cli
+    variables:
+      GIT_COMMIT_SHORT_SHA: value-set-below
+    steps:
+      - script: |
+          sourceVersion=$(Build.SourceVersion)
+          echo sourceVersion: $sourceVersion
+
+          shortSha=${sourceVersion:0:7}
+          echo shortSha: $shortSha
+
+          echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
+        displayName: get commit short sha
+      - script: |
+          docker run --rm \
+            pactfoundation/pact-cli:latest \
+            broker can-i-deploy \
+            --pacticipant "Consumer App" \
+            --version $GIT_COMMIT_SHORT_SHA \
+            --to dev \
+            --broker-base-url=$PACT_BROKER_BASE_URL \
+            --broker-token=$PACT_BROKER_API_TOKEN \
+            --retry-while-unknown 2 \
+            --retry-interval 30 \
+            --verbose
+        displayName: pact-broker can-i-deploy
+        env:
+          PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
+          
+  - job: deploy
+    dependsOn: can_i_deploy
+    services:
+      pact_cli: pact_cli
+    variables:
+      GIT_COMMIT_SHORT_SHA: value-set-below
+    steps:
+      - script: |
+          echo fake deployment step that assumes deployment was successful
+        displayName: deploy (fake)
+      - script: |
+          sourceVersion=$(Build.SourceVersion)
+          echo sourceVersion: $sourceVersion
+
+          shortSha=${sourceVersion:0:7}
+          echo shortSha: $shortSha
+
+          echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
+        displayName: get commit short sha
+      - script: |
+          docker run --rm \
+            pactfoundation/pact-cli:latest \
+            broker create-version-tag \
+            --pacticipant "Consumer App" \
+            --version $GIT_COMMIT_SHORT_SHA \
+            --tag dev \
+            --broker-base-url=$PACT_BROKER_BASE_URL \
+            --broker-token=$PACT_BROKER_API_TOKEN \
+            --verbose
+        displayName: pact-broker create-version-tag
+        env:
+          PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+          PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
