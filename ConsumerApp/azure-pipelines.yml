@@ -68,8 +68,8 @@ stages:
           PACT_BROKER_BASE_URL: $(pact.broker.base.url)
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
 
-  - job: check_pacts
-    displayName: check pacts
+  - job: can_i_deploy
+    displayName: can i deploy
     dependsOn: publish_pacts
     services:
       pact_cli: pact_cli
@@ -103,7 +103,7 @@ stages:
           PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
           
   - job: deploy
-    dependsOn: check_pacts
+    dependsOn: can_i_deploy
     services:
       pact_cli: pact_cli
     variables:

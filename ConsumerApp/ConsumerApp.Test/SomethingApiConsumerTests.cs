@@ -12,12 +12,15 @@ namespace PactNet01.ConsumerApp.Test
     public class SomethingApiConsumerTests
     {
         private const int MockServerPort = 9222;
+        
+        private IPactBuilder _pactBuilder;
+        private IMockProviderService _mockProviderService;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _pactBuilder = new PactBuilder(new PactConfig {SpecificationVersion = "2.0.0"});
-            _pactBuilder.ServiceConsumer("My Consumer NUnit").HasPactWith("Something API");
+            _pactBuilder.ServiceConsumer("Consumer App").HasPactWith("Something API");
             _mockProviderService = _pactBuilder.MockService(MockServerPort);
         }
 
@@ -40,7 +43,7 @@ namespace PactNet01.ConsumerApp.Test
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
             _mockProviderService
-                .Given("There is a something with id 'tester'")
+                .Given("Some application state")
                 .UponReceiving("A GET request to retrieve something")
                 .With(new ProviderServiceRequest
                 {
@@ -77,8 +80,5 @@ namespace PactNet01.ConsumerApp.Test
             _mockProviderService.VerifyInteractions();
             actualSomething.Should().BeEquivalentTo(expectedSomething);
         }
-
-        private IPactBuilder _pactBuilder;
-        private IMockProviderService _mockProviderService;
     }
 }
