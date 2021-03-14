@@ -11,13 +11,13 @@ using Xunit;
 
 namespace PactNet01.ProviderApi.Test.Contract
 {
-    public class FooApiConsumerTests : IClassFixture<ConsumerPactClassFixture>
+    public class FooApiConsumerTests : IClassFixture<FooApiConsumerPactClassFixture>
     {
-        public FooApiConsumerTests(ConsumerPactClassFixture fixture)
+        public FooApiConsumerTests(FooApiConsumerPactClassFixture fixture)
         {
             _mockProviderService = fixture.MockProviderService;
             _mockProviderService.ClearInteractions();
-            _mockProviderServiceBaseUri = ConsumerPactClassFixture.MockProviderServiceBaseUri;
+            _mockProviderServiceBaseUri = FooApiConsumerPactClassFixture.MockProviderServiceBaseUri;
         }
 
         [Fact]

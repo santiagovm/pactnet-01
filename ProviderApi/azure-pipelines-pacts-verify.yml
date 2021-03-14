@@ -36,4 +36,4 @@ stages:
           PACT_CONSUMER_TAG: ${{parameters.pact_content_changed.consumerTag}}
           PACT_PROVIDER_TAG: $(Build.SourceBranch)
           GIT_COMMIT_SHORT_SHA: $(GIT_COMMIT_SHORT_SHA)
-          PROVIDER_FOO_API_BASE_URI: http://localhost:9333 # todo: hardcode this value in the test
+          PROVIDER_FOO_API_BASE_URI: http://localhost:9333

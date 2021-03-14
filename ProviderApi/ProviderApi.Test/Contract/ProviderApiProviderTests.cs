@@ -13,18 +13,18 @@ using Xunit.Abstractions;
 
 namespace PactNet01.ProviderApi.Test.Contract
 {
-    public class SomethingApiProviderTests : IDisposable
+    public class ProviderApiProviderTests : IDisposable
     {
         private const string TestServiceBaseUri = "https://localhost:9001";
         
-        public SomethingApiProviderTests(ITestOutputHelper outputHelper)
+        public ProviderApiProviderTests(ITestOutputHelper outputHelper)
         {
             // setup Foo API mock
             _fooApiMockBuilder = new PactBuilder(new PactConfig { SpecificationVersion = "2.0.0" });
-            _fooApiMockBuilder.ServiceConsumer("Something API2").HasPactWith("Foo API");
-            _fooApiMock = _fooApiMockBuilder.MockService(9333, host: IPAddress.Any); // santi: this has to match port in .env, kind of brittle
+            _fooApiMockBuilder.ServiceConsumer("Provider API").HasPactWith("Foo API");
+            _fooApiMock = _fooApiMockBuilder.MockService(9333, host: IPAddress.Any);
 
-            // setup Something API to be tested
+            // setup Provider API to be tested
             _outputHelper = outputHelper;
 
             _webHost = WebHost
@@ -45,7 +45,7 @@ namespace PactNet01.ProviderApi.Test.Contract
         }
 
         [Fact]
-        public void PactflowWebhook_EnsureSomethingApiHonorsContractsWithPublishedPact()
+        public void PactflowWebhook_EnsureProviderApiHonorsContractsWithPublishedPact()
         {
             // arrange
             
@@ -112,7 +112,7 @@ namespace PactNet01.ProviderApi.Test.Contract
                 Verbose = true
             });
 
-            // todo: compare with this sample
+            // santi: compare with this sample
             // https://github.com/pactflow/example-provider-dotnet/blob/11285b385f6afca6e2484f31d894065b2165072d/tests/ProviderApiTests.cs#L56
 
             PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
@@ -126,13 +126,14 @@ namespace PactNet01.ProviderApi.Test.Contract
             
             pactVerifier
                 .ProviderState($"{TestServiceBaseUri}/provider-states")
-                .ServiceProvider("Something API", TestServiceBaseUri)
+                .ServiceProvider("Provider API", TestServiceBaseUri)
                 .PactBroker(
                     pactBrokerBaseUrl,
                     pactUriOptions,
                     true,
                     new []{ "ref/heads/main", "dev", "uat", "prod" },
                     new[] { pactProviderTag },
+                    // santi: review this
                     // consumerVersionSelectors: [{ tag: 'master', latest: true }, { tag: 'prod', latest: true } ],
                     // from https://katacoda.com/pact/scenarios/pactflow-can-i-deploy-js
                     consumerVersionSelectors
