@@ -92,7 +92,7 @@ stages:
           docker run --rm \
             pactfoundation/pact-cli:latest \
             broker can-i-deploy \
-            --pacticipant "My Consumer NUnit" \
+            --pacticipant "Consumer App" \
             --version $GIT_COMMIT_SHORT_SHA \
             --to dev \
             --broker-base-url=$PACT_BROKER_BASE_URL \
@@ -128,7 +128,7 @@ stages:
           docker run --rm \
             pactfoundation/pact-cli:latest \
             broker create-version-tag \
-            --pacticipant "My Consumer NUnit" \
+            --pacticipant "Consumer App" \
             --version $GIT_COMMIT_SHORT_SHA \
             --tag dev \
             --broker-base-url=$PACT_BROKER_BASE_URL \
