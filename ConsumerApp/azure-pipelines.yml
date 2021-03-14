@@ -5,7 +5,7 @@ trigger:
     - main
   paths:
     include:
-    - consumer
+    - ConsumerApp
 
 resources:
   containers:
@@ -26,8 +26,8 @@ stages:
         displayName: dotnet test
         inputs:
           command: test
-          arguments: 'consumer/Consumer.Test.NUnit/Consumer.Test.NUnit.csproj --configuration Release'
-      - publish: 'consumer/Consumer.Test.NUnit/pacts'
+          arguments: 'ConsumerApp/ConsumerApp.Test/ConsumerApp.Test.csproj --configuration Release'
+      - publish: 'ConsumerApp/ConsumerApp.Test/pacts'
         artifact: pacts
         displayName: create pacts artifact
         
