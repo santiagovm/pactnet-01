@@ -43,34 +43,33 @@ namespace PactNet01.ConsumerApp.Test
             const string guidRegex = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
 
             _mockProviderService
-                .Given("Some application state")
-                .UponReceiving("A GET request to retrieve something")
-                .With(new ProviderServiceRequest
-                {
-                    Method = HttpVerb.Get,
-                    Path = Match.Regex($"/somethings/{expectedId}", $"^\\/somethings\\/{guidRegex}$"),
-                    Query = "field1=value1&field2=value2",
-                    Headers = new Dictionary<string, object>
-                    {
-                        { "Accept", "application/json" }
-                    }
-                })
-                .WillRespondWith(new ProviderServiceResponse
-                {
-                    Status = 200,
-                    Headers = new Dictionary<string, object>
-                    {
-                        { "Content-Type", "application/json; charset=utf-8" }
-                    },
-                    Body = new
-                    {
-                        id = Match.Type(expectedId),
-                        firstName = Match.Type(expectedFirstName),
-                        lastName = Match.Type(expectedLastName)
-                    }
-                });
-
-
+               .Given("Some application state")
+               .UponReceiving("A GET request to retrieve something")
+               .With(new ProviderServiceRequest
+                     {
+                         Method = HttpVerb.Get,
+                         Path = Match.Regex($"/somethings/{expectedId}", $"^\\/somethings\\/{guidRegex}$"),
+                         Query = "field1=value1&field2=value2",
+                         Headers = new Dictionary<string, object>
+                                   {
+                                       { "Accept", "application/json" }
+                                   }
+                     })
+               .WillRespondWith(new ProviderServiceResponse
+                                {
+                                    Status = 200,
+                                    Headers = new Dictionary<string, object>
+                                              {
+                                                  { "Content-Type", "application/json; charset=utf-8" }
+                                              },
+                                    Body = Match.Type(new
+                                                      {
+                                                          id = Match.Type(expectedId),
+                                                          firstName = Match.Type(expectedFirstName),
+                                                          lastName = Match.Type(expectedLastName)
+                                                      })
+                                });
+            
             var consumer = new SomethingApiClient($"http://localhost:{MockServerPort}");
 
             // act
