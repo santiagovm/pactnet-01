@@ -40,7 +40,7 @@ stages:
     displayName: santi test 2
     dependsOn: santi_test_1
     variables:
-      santiVar2: $[ dependencies.santi_test_1.outputs['SANTI_GIT_COMMIT_SHORT_SHA'] ]
+      santiVar2: $[ dependencies.santi_test_1.outputs['outputVars.SANTI_GIT_COMMIT_SHORT_SHA'] ]
     steps:
       - script: |
           echo var: $(santiVar2)
