@@ -176,36 +176,40 @@ stages:
             PACT_BROKER_BASE_URL: $(pact.broker.base.url)
             PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
 
-    - job: deploy
+    - deployment: deploy
       dependsOn: can_i_deploy
+      environment: uat
       services:
         pact_cli: pact_cli
       variables:
         GIT_COMMIT_SHORT_SHA: value-set-below
-      steps:
-        - script: |
-            echo fake deployment step that assumes deployment was successful
-          displayName: deploy (fake)
-        - script: |
-            sourceVersion=$(Build.SourceVersion)
-            echo sourceVersion: $sourceVersion
-
-            shortSha=${sourceVersion:0:7}
-            echo shortSha: $shortSha
-
-            echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
-          displayName: get commit short sha
-        - script: |
-            docker run --rm \
-              pactfoundation/pact-cli:latest \
-              broker create-version-tag \
-              --pacticipant "Consumer App" \
-              --version $GIT_COMMIT_SHORT_SHA \
-              --tag uat \
-              --broker-base-url=$PACT_BROKER_BASE_URL \
-              --broker-token=$PACT_BROKER_API_TOKEN \
-              --verbose
-          displayName: pact-broker create-version-tag
-          env:
-            PACT_BROKER_BASE_URL: $(pact.broker.base.url)
-            PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: |
+                  echo fake deployment step that assumes deployment was successful
+                displayName: deploy (fake)
+              - script: |
+                  sourceVersion=$(Build.SourceVersion)
+                  echo sourceVersion: $sourceVersion
+      
+                  shortSha=${sourceVersion:0:7}
+                  echo shortSha: $shortSha
+      
+                  echo "##vso[task.setvariable variable=GIT_COMMIT_SHORT_SHA]$shortSha"
+                displayName: get commit short sha
+              - script: |
+                  docker run --rm \
+                    pactfoundation/pact-cli:latest \
+                    broker create-version-tag \
+                    --pacticipant "Consumer App" \
+                    --version $GIT_COMMIT_SHORT_SHA \
+                    --tag uat \
+                    --broker-base-url=$PACT_BROKER_BASE_URL \
+                    --broker-token=$PACT_BROKER_API_TOKEN \
+                    --verbose
+                displayName: pact-broker create-version-tag
+                env:
+                  PACT_BROKER_BASE_URL: $(pact.broker.base.url)
+                  PACT_BROKER_API_TOKEN: $(pact.broker.api.token)
