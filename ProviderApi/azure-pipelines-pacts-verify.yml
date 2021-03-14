@@ -2,8 +2,11 @@ trigger: none
 
 resources:
   webhooks:
-  - webhook: pact_content_changed
-    connection: vasquez_house_pactflow
+    - webhook: pact_content_changed
+      connection: vasquez_house_pactflow
+      filters:
+        - path: eventName
+          value: contract_content_changed
 
 pool:
   vmImage: ubuntu-latest

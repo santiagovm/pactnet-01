@@ -2,9 +2,11 @@ trigger: none
 
 resources:
   webhooks:
-    - webhook: provider_verification_succeeded
-      connection: vasquez_house_pactflow_provider_verification_succeeded
+    - webhook: pact_content_changed
+      connection: vasquez_house_pactflow
       filters:
+        - path: eventName
+          value: provider_verification_succeeded
         - path: consumerName
           value: Consumer App
   containers:
