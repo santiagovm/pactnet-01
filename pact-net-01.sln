@@ -3,15 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsumerApp", "ConsumerApp", "{C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}"
 	ProjectSection(SolutionItems) = preProject
-		consumer\azure-pipelines.yml = consumer\azure-pipelines.yml
-		consumer\deploy-app-service-template.yml = consumer\deploy-app-service-template.yml
+		ConsumerApp\azure-pipelines.yml = ConsumerApp\azure-pipelines.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consumer", "consumer\consumer\consumer.csproj", "{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer.Test.XUnit", "consumer\Consumer.Test.XUnit\Consumer.Test.XUnit.csproj", "{F3E9577D-26E9-4383-9EF9-0E906E30C351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerApp", "ConsumerApp\ConsumerApp\ConsumerApp.csproj", "{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provider", "Provider", "{F92AD1A8-B7FE-4CCE-8350-282F569E23E0}"
 ProjectSection(SolutionItems) = preProject
@@ -23,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "provider", "provider\provid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Test", "provider\Provider.Test\Provider.Test.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer.Test.NUnit", "consumer\Consumer.Test.NUnit\Consumer.Test.NUnit.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerApp.Test", "ConsumerApp\ConsumerApp.Test\ConsumerApp.Test.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{1D079217-598B-4A41-B4BD-B5C24CBE8882}"
 ProjectSection(SolutionItems) = preProject
@@ -52,18 +49,6 @@ Global
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}.Release|x64.Build.0 = Release|Any CPU
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}.Release|x86.ActiveCfg = Release|Any CPU
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}.Release|x86.Build.0 = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|x64.Build.0 = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Debug|x86.Build.0 = Debug|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|x64.ActiveCfg = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|x64.Build.0 = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|x86.ActiveCfg = Release|Any CPU
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351}.Release|x86.Build.0 = Release|Any CPU
 		{4103C32C-313E-4E11-87D2-C71E2D006FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4103C32C-313E-4E11-87D2-C71E2D006FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4103C32C-313E-4E11-87D2-C71E2D006FB1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -106,7 +91,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}
-		{F3E9577D-26E9-4383-9EF9-0E906E30C351} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}
 		{4103C32C-313E-4E11-87D2-C71E2D006FB1} = {F92AD1A8-B7FE-4CCE-8350-282F569E23E0}
 		{6AC7462D-AA31-4D6F-8681-379D8CA2F500} = {F92AD1A8-B7FE-4CCE-8350-282F569E23E0}
 		{76CCEE9B-0AC8-4EDF-9634-28D54121865A} = {C96E27E1-75C6-4B7F-9DE0-730B2ADA84C5}

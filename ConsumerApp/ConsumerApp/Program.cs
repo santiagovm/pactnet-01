@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace PactNet01.Consumer
+namespace PactNet01.ConsumerApp
 {
     public static class Program
     {
@@ -18,6 +18,3 @@ namespace PactNet01.Consumer
                 });
     }
 }
-
-// santi: Dockerfile
-// santi: Docker compose

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>PactNet01.Consumer</RootNamespace>
+    <RootNamespace>PactNet01.ConsumerApp</RootNamespace>
   </PropertyGroup>
 
 </Project>

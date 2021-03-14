@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace PactNet01.Consumer
+namespace PactNet01.ConsumerApp
 {
     public class Startup
     {

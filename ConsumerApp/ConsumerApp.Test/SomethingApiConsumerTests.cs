@@ -7,7 +7,7 @@ using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 
-namespace PactNet01.Consumer.Test.NUnit
+namespace PactNet01.ConsumerApp.Test
 {
     public class SomethingApiConsumerTests
     {

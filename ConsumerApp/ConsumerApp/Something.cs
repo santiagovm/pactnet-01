@@ -1,10 +1,9 @@
 using System;
 
-namespace PactNet01.Consumer
+namespace PactNet01.ConsumerApp
 {
     public class Something
     {
-        // public setters required for serialization
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
