@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
@@ -28,16 +29,10 @@ namespace PactNet01.ConsumerApp
                 Query = queryString.ToString() ?? string.Empty
             };
 
-            using var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = uriBuilder.Uri
-            };
-
-            request.Headers.Add("Accept", "application/json");
-
             using var httpClient = new HttpClient();
-            using HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using HttpResponseMessage response = await httpClient.GetAsync(uriBuilder.Uri);
 
             HttpStatusCode status = response.StatusCode;
 
@@ -46,14 +41,14 @@ namespace PactNet01.ConsumerApp
                 throw new Exception(response.ReasonPhrase);
             }
 
-            await using Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            await using Stream stream = await response.Content.ReadAsStreamAsync();
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
 
-            return await JsonSerializer.DeserializeAsync<Something>(stream, options).ConfigureAwait(false);
+            return await JsonSerializer.DeserializeAsync<Something>(stream, options);
         }
 
         private readonly string _baseUri;

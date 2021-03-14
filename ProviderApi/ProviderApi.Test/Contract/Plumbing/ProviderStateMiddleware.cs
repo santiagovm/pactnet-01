@@ -33,7 +33,7 @@ namespace PactNet01.ProviderApi.Test.Contract.Plumbing
             }
         }
 
-        private async void HandleProviderStatesRequest(HttpContext context)
+        private void HandleProviderStatesRequest(HttpContext context)
         {
             context.Response.StatusCode = (int) HttpStatusCode.OK;
 
