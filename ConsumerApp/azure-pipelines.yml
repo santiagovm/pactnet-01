@@ -14,6 +14,9 @@ resources:
 
 pool:
     vmImage: ubuntu-latest
+    
+variables:
+  - group: pactflow-variables
 
 stages:
 - stage: dev
