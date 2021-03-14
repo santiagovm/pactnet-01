@@ -6,7 +6,10 @@ resources:
     connection: vasquez_house_pactflow
 
 pool:
-    vmImage: ubuntu-latest
+  vmImage: ubuntu-latest
+    
+variables:
+  - group: pactflow-variables
 
 stages:
 - stage: dev
