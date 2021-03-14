@@ -91,13 +91,10 @@ namespace PactNet01.ProviderApi.Test.Contract
             bool isRunningInPipeline = "true".Equals(Environment.GetEnvironmentVariable("CI"));
             string pactBrokerBaseUrl = Environment.GetEnvironmentVariable("PACT_BROKER_BASE_URL");
             string pactBrokerApiToken = Environment.GetEnvironmentVariable("PACT_BROKER_API_TOKEN");
-            string pactConsumerName = Environment.GetEnvironmentVariable("PACT_CONSUMER_NAME");
-            string pactConsumerTag = Environment.GetEnvironmentVariable("PACT_CONSUMER_TAG");
             string pactProviderTag = Environment.GetEnvironmentVariable("PACT_PROVIDER_TAG");
+            string pactUrl = Environment.GetEnvironmentVariable("PACT_URL");
             string gitCommitShortSha = Environment.GetEnvironmentVariable("GIT_COMMIT_SHORT_SHA");
-
-            // act
-            // assert
+            
             var pactVerifier = new PactVerifier(new PactVerifierConfig
             {
                 ProviderVersion = gitCommitShortSha,
@@ -108,38 +105,39 @@ namespace PactNet01.ProviderApi.Test.Contract
 
             PactUriOptions pactUriOptions = new PactUriOptions().SetBearerAuthentication(pactBrokerApiToken);
 
-            var consumerVersionSelectors = new List<VersionTagSelector>();
+            pactVerifier
+               .ProviderState($"{TestServiceBaseUri}/provider-states")
+               .ServiceProvider("Provider API", TestServiceBaseUri);
 
-            // pactConsumerName is provided to pipeline triggered by pactflow webhook indicating what consumer published a new contract for verification
+            // pactUrl is provided to pipeline triggered by pactflow webhook indicating what specific pact should be verified
             // if value is missing then default verification is performed for all consumers with tags: main, dev, uat, prod
-            if (string.IsNullOrWhiteSpace(pactConsumerName))
+
+            bool isVerifyingSpecificPact = !string.IsNullOrWhiteSpace(pactUrl);
+            
+            if (isVerifyingSpecificPact)
             {
-                consumerVersionSelectors.AddRange(new[]
-                                                  {
-                                                      new VersionTagSelector("refs/heads/main", latest: true),
-                                                      new VersionTagSelector("dev", latest: true),
-                                                      new VersionTagSelector("uat", latest: true),
-                                                      new VersionTagSelector("prod", latest: true)
-                                                  });
+                pactVerifier.PactUri(pactUrl, pactUriOptions);
             }
             else
             {
-                // santi: example below shows a more precise way to target the specific pact to verify
-                // https://github.com/pactflow/example-provider-dotnet/blob/11285b385f6afca6e2484f31d894065b2165072d/tests/ProviderApiTests.cs#L56
-                consumerVersionSelectors.Add(new VersionTagSelector(pactConsumerTag, pactConsumerName, latest: true));
-            }
+                var consumerVersionSelectors = new List<VersionTagSelector>
+                                               {
+                                                   new VersionTagSelector("refs/heads/main", latest: true),
+                                                   new VersionTagSelector("dev", latest: true),
+                                                   new VersionTagSelector("uat", latest: true),
+                                                   new VersionTagSelector("prod", latest: true)
+                                               };
 
-            pactVerifier
-               .ProviderState($"{TestServiceBaseUri}/provider-states")
-               .ServiceProvider("Provider API", TestServiceBaseUri)
-               .PactBroker(
-                           pactBrokerBaseUrl,
-                           pactUriOptions,
-                           true,
-                           providerVersionTags: new[] { pactProviderTag },
-                           consumerVersionSelectors: consumerVersionSelectors
-                          )
-               .Verify();
+                pactVerifier.PactBroker(pactBrokerBaseUrl,
+                                        pactUriOptions,
+                                        true,
+                                        providerVersionTags: new[] { pactProviderTag },
+                                        consumerVersionSelectors: consumerVersionSelectors);
+            }
+            
+            // act
+            // assert
+            pactVerifier.Verify();
         }
 
         private readonly ITestOutputHelper _outputHelper;

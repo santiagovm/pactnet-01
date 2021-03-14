@@ -9,7 +9,7 @@ namespace PactNet01.ProviderApi.Test.Contract.Plumbing
     {
         public IMockProviderService MockProviderService { get; }
 
-        private static int MockServerPort => 9444; // santi: this cannot match the port in the other test: 9333
+        private static int MockServerPort => 9444;
         public static string MockProviderServiceBaseUri => $"http://localhost:{MockServerPort}";
 
         public FooApiConsumerPactClassFixture()
