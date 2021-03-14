@@ -150,6 +150,7 @@ stages:
 
     - job: deploy
       dependsOn: can_i_deploy
+      environment: uat
       services:
         pact_cli: pact_cli
       variables:
