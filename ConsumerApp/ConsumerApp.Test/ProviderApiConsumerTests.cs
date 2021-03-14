@@ -9,7 +9,7 @@ using PactNet.Mocks.MockHttpService.Models;
 
 namespace PactNet01.ConsumerApp.Test
 {
-    public class SomethingApiConsumerTests
+    public class ProviderApiConsumerTests
     {
         private const int MockServerPort = 9222;
         
@@ -20,7 +20,7 @@ namespace PactNet01.ConsumerApp.Test
         public void OneTimeSetUp()
         {
             _pactBuilder = new PactBuilder(new PactConfig {SpecificationVersion = "2.0.0"});
-            _pactBuilder.ServiceConsumer("Consumer App").HasPactWith("Something API");
+            _pactBuilder.ServiceConsumer("Consumer App").HasPactWith("Provider API");
             _mockProviderService = _pactBuilder.MockService(MockServerPort);
         }
 

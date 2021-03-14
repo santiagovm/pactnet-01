@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>PactNet01.Provider</RootNamespace>
+    <RootNamespace>PactNet01.ProviderApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

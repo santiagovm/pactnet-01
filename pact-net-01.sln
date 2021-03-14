@@ -10,15 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsumerApp", "ConsumerApp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerApp", "ConsumerApp\ConsumerApp\ConsumerApp.csproj", "{A5FDF962-4294-42B1-B62D-3D3D51DDDBAD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provider", "Provider", "{F92AD1A8-B7FE-4CCE-8350-282F569E23E0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProviderApi", "ProviderApi", "{F92AD1A8-B7FE-4CCE-8350-282F569E23E0}"
 ProjectSection(SolutionItems) = preProject
-	provider\azure-pipelines-pacts-verify.yml = provider\azure-pipelines-pacts-verify.yml
-	provider\azure-pipelines.yml = provider\azure-pipelines.yml
+	ProviderApi\azure-pipelines-pacts-verify.yml = ProviderApi\azure-pipelines-pacts-verify.yml
+	ProviderApi\azure-pipelines.yml = ProviderApi\azure-pipelines.yml
 EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "provider", "provider\provider\provider.csproj", "{4103C32C-313E-4E11-87D2-C71E2D006FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProviderApi", "ProviderApi\ProviderApi\ProviderApi.csproj", "{4103C32C-313E-4E11-87D2-C71E2D006FB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Provider.Test", "provider\Provider.Test\Provider.Test.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProviderApi.Test", "ProviderApi\ProviderApi.Test\ProviderApi.Test.csproj", "{6AC7462D-AA31-4D6F-8681-379D8CA2F500}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerApp.Test", "ConsumerApp\ConsumerApp.Test\ConsumerApp.Test.csproj", "{76CCEE9B-0AC8-4EDF-9634-28D54121865A}"
 EndProject

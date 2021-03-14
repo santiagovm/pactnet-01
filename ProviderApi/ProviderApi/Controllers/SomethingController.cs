@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PactNet01.Provider.Domain;
-using PactNet01.Provider.FooIntegration;
+using PactNet01.ProviderApi.Domain;
+using PactNet01.ProviderApi.FooIntegration;
 
-namespace PactNet01.Provider.Controllers
+namespace PactNet01.ProviderApi.Controllers
 {
     [Route("somethings")]
     public class SomethingController : Controller

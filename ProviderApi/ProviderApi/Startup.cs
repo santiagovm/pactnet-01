@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using PactNet01.Provider.FooIntegration;
+using PactNet01.ProviderApi.FooIntegration;
 
-namespace PactNet01.Provider
+namespace PactNet01.ProviderApi
 {
     public class Startup
     {
@@ -62,7 +62,7 @@ namespace PactNet01.Provider
             app.UseSwagger();
             app.UseSwaggerUI(options =>
                              {
-                                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Something API v1");
+                                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Provider API");
                                  options.RoutePrefix = string.Empty;
                              });
 

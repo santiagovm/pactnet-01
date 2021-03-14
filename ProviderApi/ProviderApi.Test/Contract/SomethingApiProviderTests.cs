@@ -7,11 +7,11 @@ using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using PactNet.Models;
-using PactNet01.Provider.Test.Contract.Plumbing;
+using PactNet01.ProviderApi.Test.Contract.Plumbing;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace PactNet01.Provider.Test.Contract
+namespace PactNet01.ProviderApi.Test.Contract
 {
     public class SomethingApiProviderTests : IDisposable
     {

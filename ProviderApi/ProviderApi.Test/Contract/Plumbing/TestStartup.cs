@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PactNet01.Provider.Test.Contract.Plumbing
+namespace PactNet01.ProviderApi.Test.Contract.Plumbing
 {
     public class TestStartup : Startup
     {
