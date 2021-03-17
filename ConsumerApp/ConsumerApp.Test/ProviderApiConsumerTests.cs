@@ -64,16 +64,16 @@ namespace PactNet01.ConsumerApp.Test
                                               },
                                     Body = Match.Type(new
                                                       {
-                                                          id = Match.Type(expectedId),
-                                                          firstName = Match.Type(expectedFirstName),
-                                                          lastName = Match.Type(expectedLastName)
+                                                          id = expectedId,
+                                                          firstName = expectedFirstName,
+                                                          lastName = expectedLastName
                                                       })
                                 });
             
             var consumer = new SomethingApiClient($"http://localhost:{MockServerPort}");
 
             // act
-            Something actualSomething = await consumer.GetSomething(expectedId).ConfigureAwait(false);
+            Something actualSomething = await consumer.GetSomething(expectedId);
 
             // assert
             _mockProviderService.VerifyInteractions();

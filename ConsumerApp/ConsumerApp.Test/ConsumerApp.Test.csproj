@@ -21,4 +21,9 @@
     <ProjectReference Include="..\ConsumerApp\ConsumerApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="logs" />
+    <Folder Include="pacts" />
+  </ItemGroup>
+
 </Project>
